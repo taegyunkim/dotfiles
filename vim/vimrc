@@ -1,0 +1,124 @@
+if isdirectory(expand("~/.dotfiles-work"))
+  source ~/.dotfiles-work/vim/vimrc
+endif
+
+" Personal settings
+set nocompatible "Disable vi-compatibility
+
+" Load bundle list
+if filereadable(expand("~/.vim/vundles.vim"))
+  source ~/.vim/vundles.vim
+endif
+
+" General config
+set number " Line numbers are good
+set backspace=indent,eol,start
+set history=1000
+set showcmd
+set showmode
+set visualbell
+set autoread
+
+set hidden
+
+syntax on
+
+set encoding=utf-8
+set fileencoding=utf-8
+
+" Change leader to a comma
+let mapleader=","
+
+" Turn off swap files
+set noswapfile
+set nobackup
+set nowb
+
+" Persistent Undo
+silent !mkdir ~/.vim/backups > /dev/null 2>&1
+if v:version >= 703
+  set undodir=~/.vim/backups
+  set undofile
+endif
+
+" Indentation Settings
+set autoindent
+set smartindent
+set smarttab
+set softtabstop=2
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+filetype plugin on
+filetype indent on
+
+set list listchars=tab:\ \ ,trail:·
+
+set wrap
+set linebreak
+set nolist
+set colorcolumn=80
+
+" Folds
+set foldmethod=indent
+set foldnestmax=3
+set nofoldenable
+
+" Scrolling
+set scrolloff=8
+set sidescrolloff=15
+set sidescroll=1
+set mouse=a " Enabling mouse scrolling
+set ttymouse=xterm2
+
+" Completion
+set wildmode=list:longest
+set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
+set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
+set wildignore+=*vim/backups*
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=vendor/rails/**
+set wildignore+=vendor/cache/**
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
+
+" Search option
+set hlsearch
+set incsearch
+set viminfo='100,f1
+set ignorecase
+set smartcase
+" Clear current search highlight by double tapping //
+nmap <silent> // :nohlsearch<CR>
+
+" turn off move down
+let g:C_Ctrl_j = 'off'
+let g:BASH_Ctrl_j = 'off'
+
+" Custom key mappings
+"Move between split windows by using Ctrl+h,l,j,k
+nnoremap <silent> <C-h> <C-w>h
+nnoremap <silent> <C-l> <C-w>l
+nnoremap <silent> <C-k> <C-w>k
+nnoremap <silent> <C-j> <C-w>j
+
+" Create Window splits easier
+nnoremap <silent> vv <C-w>v
+nnoremap <silent> ss <C-w>s
+
+" Move between buffers
+nnoremap <silent> <C-n> :bn<CR>
+nnoremap <silent> <C-p> :bp<CR>
+
+" copy to system clipboard
+vmap <silent> <leader>y "*y
+
+" Toggle paste mode
+set pastetoggle=<F2>
+
+" Remove trailing space at the end
+autocmd BufWritePre * :%s/\s\+$//e

@@ -1,0 +1,12 @@
+[submodule "zsh/prezto"]
+	path = zsh/prezto
+	url = git@github.com:sorin-ionescu/prezto.git
+[submodule "dircolors-solarized"]
+	path = dircolors-solarized
+	url = git@github.com:seebi/dircolors-solarized.git
+[submodule "vim/bundle/Vundle.vim"]
+	path = vim/bundle/Vundle.vim
+	url = git@github.com:gmarik/Vundle.vim.git
+[submodule "tmux/plugins/tpm"]
+	path = tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm

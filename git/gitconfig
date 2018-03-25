@@ -1,0 +1,14 @@
+[user]
+	name = Taegyun Kim
+	email = k.taegyun@gmail.com
+[push]
+	default = current
+[core]
+	excludesfile = ~/.gitignore
+[alias]
+  tree = log --graph --decorate --pretty=oneline --abbrev-commit
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto

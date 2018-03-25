@@ -1,0 +1,15 @@
+#
+# Executes commands at login pre-zshrc.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Reset PATH to keep it from being clobbered in tmux.
+# Refer https://github.com/yyuu/pyenv/issues/85
+if [ -x pyenv ]; then
+  if [ -x /usr/libexec/path_helper ]; then
+    PATH=''
+    source /etc/zprofile
+  fi
+fi
