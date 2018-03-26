@@ -7,10 +7,10 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'xolox/vim-misc'
-" async language server protocol plugin for vim and neovim
-Plugin 'prabirshrestha/vim-lsp'
 " normalize async job control api for vim and neovim
 Plugin 'prabirshrestha/async.vim'
+" async language server protocol plugin for vim and neovim
+Plugin 'prabirshrestha/vim-lsp'
 
 " Vim appearance
 Plugin 'altercation/vim-colors-solarized'
