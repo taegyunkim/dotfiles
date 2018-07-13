@@ -43,10 +43,10 @@ endif
 Plugin 'tpope/vim-obsession'
 
 " Syntax checking
-Plugin 'scrooloose/syntastic'
+Plugin 'vim-syntastic/syntastic'
 if !isdirectory('~/.dotfiles-work')
   " the ultimate autocompletion system for vim
-  Plugin 'Shougo/neocomplcache.vim'
+  Plugin 'Valloric/YouCompleteMe'
 endif
 
 " Go plugin
