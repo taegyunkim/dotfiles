@@ -46,3 +46,5 @@ fi
 if [[ -x pyenv ]]; then
   eval "$(pyenv init -)"
 fi
+
+source /home/taegyunk/miniconda3/etc/profile.d/conda.sh
