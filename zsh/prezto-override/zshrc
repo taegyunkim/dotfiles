@@ -17,8 +17,6 @@ if [[ -d ~/.dotfiles-work ]]; then
   source ~/.dotfiles-work/zsh/zprezto-override/zshrc
 fi
 
-prompt agnoster
-
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   export TERM=xterm-256color
 
