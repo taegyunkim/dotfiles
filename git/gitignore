@@ -22,3 +22,7 @@ vim/.netrwhist
 
 tmux/plugins
 tmux/resurrect
+
+# jupyter notebook
+*__pycache__
+*.ipynb_checkpoints
