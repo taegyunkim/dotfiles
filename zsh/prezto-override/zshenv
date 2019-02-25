@@ -42,6 +42,9 @@ typeset -gU cdpath fpath mailpath path
 
 # Set the list of directories that Zsh searches for programs.
 path=(
+  /usr/local/sketch/sketch-frontend
+  $HOME/.jenv/bin
+  /usr/local/miniconda3/bin
   $HOME/homebrew/{bin,sbin}
   /usr/local/{bin,sbin}
   ~/usr/{bin,sbin}
