@@ -49,7 +49,11 @@ if !isdirectory('~/.dotfiles-work')
   Plugin 'Valloric/YouCompleteMe'
 endif
 
-" Go plugin
+" ctags plugin
+Plugin 'xolox/vim-easytags'
+
+" Language plugins
 Plugin 'fatih/vim-go'
+Plugin 'vhda/verilog_systemverilog.vim'
 
 call vundle#end()
