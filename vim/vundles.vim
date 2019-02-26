@@ -6,9 +6,11 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
+Plugin 'google/vim-maktaba'
 Plugin 'xolox/vim-misc'
 " normalize async job control api for vim and neovim
 Plugin 'prabirshrestha/async.vim'
+
 " async language server protocol plugin for vim and neovim
 Plugin 'prabirshrestha/vim-lsp'
 
@@ -56,4 +58,12 @@ Plugin 'xolox/vim-easytags'
 Plugin 'fatih/vim-go'
 Plugin 'vhda/verilog_systemverilog.vim'
 
+" Code Formatting
+Plugin 'google/vim-codefmt'
+
+" Glaive, used to configure codefmt's maktaba flags.
+Plugin 'google/vim-glaive'
+
 call vundle#end()
+
+call glaive#Install()
