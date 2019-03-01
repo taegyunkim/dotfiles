@@ -59,6 +59,7 @@ set wrap
 set linebreak
 set nolist
 set colorcolumn=80
+set textwidth=80
 
 " Folds
 set foldmethod=indent
