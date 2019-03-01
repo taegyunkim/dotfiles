@@ -64,6 +64,9 @@ Plugin 'google/vim-codefmt'
 " Glaive, used to configure codefmt's maktaba flags.
 Plugin 'google/vim-glaive'
 
+" Git integration
+Plugin 'tpope/vim-fugitive'
+
 call vundle#end()
 
 call glaive#Install()
