@@ -45,7 +45,6 @@ path=(
   $HOME/.jenv/bin
   $HOME/.cargo/bin
   /usr/local/sketch/sketch-frontend
-  /usr/local/miniconda3/bin
   /usr/local/{bin,sbin}
   ~/usr/{bin,sbin}
   $path
