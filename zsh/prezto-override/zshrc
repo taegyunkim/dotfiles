@@ -19,6 +19,7 @@ fi
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   export TERM=xterm-256color
+  export PATH="/home/taegyunk/.pyenv/bin:$PATH"
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 
@@ -40,6 +41,10 @@ fi
 # jenv
 eval "$(jenv init -)"
 
-source /usr/local/miniconda3/etc/profile.d/conda.sh
+# pyenv
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+source /home/taegyunk/miniconda3/etc/profile.d/conda.sh
 
 export SKETCH_HOME=/usr/local/sketch/sketch-frontend/runtime
