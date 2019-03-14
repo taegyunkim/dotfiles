@@ -8,3 +8,4 @@ ln -nfs ~/.dotfiles/vim ~/.vim
 ln -s ~/.dotfiles/vim/vimrc ~/.vimrc
 ln -nfs ~/.dotfiles/tmux ~/.tmux
 ln -s ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
+ln -s ~/.dotfiles/ycm_extra_conf.py ~/.ycm_extra_conf.py
