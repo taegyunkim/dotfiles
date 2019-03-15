@@ -66,6 +66,7 @@ Plugin 'google/vim-glaive'
 
 " Git integration
 Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 
 call vundle#end()
 
