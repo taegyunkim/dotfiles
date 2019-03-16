@@ -31,6 +31,8 @@ Plugin 'rking/ag.vim'
 Plugin 'majutsushi/tagbar'
 " Buffer Explorer"
 Plugin 'jlanzarotta/bufexplorer'
+" Related files, I miss vim-relatedfiles so much :'(
+Plugin 'vim-scripts/a.vim'
 
 " Quote/Parenthesis simple"
 Plugin 'tpope/vim-surround'
