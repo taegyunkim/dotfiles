@@ -12,16 +12,7 @@ fi
 
 # Customize to your needs...
 
-# Load work zshrc
-if [[ -d ~/.dotfiles-work ]]; then
-  source ~/.dotfiles-work/zsh/zprezto-override/zshrc
-fi
-
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-  export TERM=xterm-256color
-  export PATH="/home/taegyunk/.pyenv/bin:$PATH"
-
-elif [[ "$OSTYPE" == "darwin"* ]]; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
 
   # How to install dir_colors solarized
   # 1. brew install coreutils
@@ -38,12 +29,4 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 
 fi
 
-# jenv
 eval "$(jenv init -)"
-
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-fi
-
-export SKETCH_HOME=/usr/local/sketch/sketch-frontend/runtime
