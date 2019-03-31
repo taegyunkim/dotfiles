@@ -95,6 +95,9 @@ zstyle ':prezto:module:editor' keymap 'vi'
 # Auto set to 'off' on dumb terminals.
 zstyle ':prezto:module:prompt' theme 'sorin'
 
+# %v - virtualenv name.
+zstyle ':prezto:module:python:info:virtualenv' format 'virtualenv:%v'
+
 #
 # Screen
 #
