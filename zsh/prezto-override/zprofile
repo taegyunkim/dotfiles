@@ -43,8 +43,8 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   $HOME/.jenv/bin
+  $HOME/.pyenv/bin
   $HOME/.cargo/bin
-  /usr/local/sketch/sketch-frontend
   /usr/local/{bin,sbin}
   $path
 )
@@ -67,4 +67,4 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   export TERM=xterm-256color
 fi
 
-export SKETCH_HOME=/usr/local/sketch/sketch-frontend/runtime
+export SKETCH_HOME=/usr/local/sketch-1.7.5/sketch-frontend/runtime
