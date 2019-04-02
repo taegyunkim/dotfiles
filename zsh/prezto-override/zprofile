@@ -45,6 +45,9 @@ path=(
   $HOME/.jenv/bin
   $HOME/.pyenv/bin
   $HOME/.cargo/bin
+  $HOME/Workspace/ns-2-allinone/bin
+  $HOME/Workspace/ns-2-allinone/tcl8.5.10/unix
+  $HOME/Workspace/ns-2-allinone/tk8.5.10/unix
   /usr/local/{bin,sbin}
   /usr/local/sketch-1.7.5/sketch-frontend
   $path
