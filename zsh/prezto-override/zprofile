@@ -63,8 +63,4 @@ if (( $+commands[lesspipe.sh] )); then
   export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
 fi
 
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-  export TERM=screen-256color
-fi
-
 export SKETCH_HOME=/usr/local/sketch-1.7.5/sketch-frontend/runtime
