@@ -54,7 +54,7 @@ path=(
 )
 
 export LD_LIBRARY_PATH=$HOME/Workspace/ns-2-allinone/otcl-1.14:$HOME/Workspace/ns-2-allinone/lib:$LD_LIBRARY_PATH
-export TCL_LIBRARY=$HOME/Workspace/ns-2-allinone/tcl8.5.10/library
+export TCL_LIBRARY=$HOME/Workspace/ns-2-allinone/tcl8.5.10/library:$HOME/Workspace/ns-2-allinone/tk8.5.10/library
 
 #
 # Less
