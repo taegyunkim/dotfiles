@@ -96,6 +96,8 @@ zstyle ':prezto:module:editor' keymap 'vi'
 zstyle ':prezto:module:prompt' theme 'sorin'
 
 # %v - virtualenv name.
+zstyle ':prezto:module:python:virtualenv' initialize 1
+zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
 zstyle ':prezto:module:python:info:virtualenv' format 'virtualenv:%v'
 
 #
