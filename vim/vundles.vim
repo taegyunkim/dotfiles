@@ -59,6 +59,7 @@ Plugin 'xolox/vim-easytags'
 " Language plugins
 Plugin 'vhda/verilog_systemverilog.vim'
 Plugin 'hdima/python-syntax'
+Plugin 'bohlender/vim-smt2'
 
 " Code Formatting
 Plugin 'google/vim-codefmt'
