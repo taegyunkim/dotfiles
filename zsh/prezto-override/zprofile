@@ -42,9 +42,10 @@ typeset -gU cdpath fpath mailpath path
 
 # Set the list of directories that Zsh searches for programs.
 path=(
-  $HOME/.jenv/bin
-  $HOME/.pyenv/bin
   $HOME/.cargo/bin
+  $HOME/.jenv/bin
+  $HOME/.rbenv/bin
+  $HOME/.pyenv/bin
   $HOME/Workspace/ns-2-allinone/bin
   $HOME/Workspace/ns-2-allinone/tcl8.5.10/unix
   $HOME/Workspace/ns-2-allinone/tk8.5.10/unix
