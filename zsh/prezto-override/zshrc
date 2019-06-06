@@ -32,3 +32,5 @@ fi
 if command -v jenv 1>/dev/null 2>&1; then
   eval "$(jenv init -)"
 fi
+
+eval "$(rbenv init -)"
