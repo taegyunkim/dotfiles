@@ -12,6 +12,9 @@ TAGS
 *.log
 *.out
 *.synctex.gz
+*.fls
+*.bbl
+*.bcf
 
 # checksum
 .md5s
