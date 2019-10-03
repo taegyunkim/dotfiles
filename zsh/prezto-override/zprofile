@@ -40,6 +40,8 @@ typeset -gU cdpath fpath mailpath path
 #   $cdpath
 # )
 
+export GUROBI_HOME="/opt/gurobi811/linux64"
+
 # Set the list of directories that Zsh searches for programs.
 path=(
   $HOME/.cargo/bin
@@ -50,13 +52,14 @@ path=(
   $HOME/Workspace/ns-2-allinone/tcl8.5.10/unix
   $HOME/Workspace/ns-2-allinone/tk8.5.10/unix
   $HOME/Workspace/domino-compiler
+  $GUROBI_HOME/bin
   /usr/local/{bin,sbin}
   /usr/local/go/bin
   /usr/local/sketch-1.7.5/sketch-frontend
   $path
 )
 
-export LD_LIBRARY_PATH=$HOME/Workspace/ns-2-allinone/otcl-1.14:$HOME/Workspace/ns-2-allinone/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$HOME/Workspace/ns-2-allinone/otcl-1.14:$HOME/Workspace/ns-2-allinone/lib:$GUROBI_HOME/lib:$LD_LIBRARY_PATH
 export TCL_LIBRARY=$HOME/Workspace/ns-2-allinone/tcl8.5.10/library:$HOME/Workspace/ns-2-allinone/tk8.5.10/library
 export GOPATH=$HOME/Workspace/golabs
 
