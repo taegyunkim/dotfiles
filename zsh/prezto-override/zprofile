@@ -40,7 +40,11 @@ typeset -gU cdpath fpath mailpath path
 #   $cdpath
 # )
 
-export GUROBI_HOME="/opt/gurobi811/linux64"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export GUROBI_HOME="/Library/gurobi811/mac64"
+else
+  export GUROBI_HOME="/opt/gurobi811/linux64"
+fi
 
 # Set the list of directories that Zsh searches for programs.
 path=(
