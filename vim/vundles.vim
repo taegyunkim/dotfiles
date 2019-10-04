@@ -65,6 +65,7 @@ Plugin 'rust-lang/rust.vim'
 
 " Code Formatting
 Plugin 'google/vim-codefmt'
+Plugin 'syml/rust-codefmt'
 
 " Glaive, used to configure codefmt's maktaba flags.
 Plugin 'google/vim-glaive'
