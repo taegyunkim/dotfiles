@@ -82,3 +82,5 @@ if (( $+commands[lesspipe.sh] )); then
 fi
 
 export SKETCH_HOME=/usr/local/sketch-1.7.5/sketch-frontend/runtime
+
+export PATH="$HOME/.cargo/bin:$PATH"
