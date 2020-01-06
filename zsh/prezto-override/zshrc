@@ -26,7 +26,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   elif [[ -x ~/homebrew/bin/gls ]]; then
     alias ls='~/homebrew/bin/gls --group-directories-first --color=auto'
   fi
+fi
 
+if [[ -s ~/.mintty-colors-solarized ]]; then
+  source ~/.mintty-colors-solarized/mintty-solarized-dark.sh
 fi
 
 if command -v jenv 1>/dev/null 2>&1; then
