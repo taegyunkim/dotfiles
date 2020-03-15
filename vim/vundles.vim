@@ -50,7 +50,7 @@ Plugin 'tpope/vim-obsession'
 Plugin 'vim-syntastic/syntastic'
 if !isdirectory('~/.dotfiles-work')
   " the ultimate autocompletion system for vim
-  Plugin 'Valloric/YouCompleteMe'
+  Plugin 'ycm-core/YouCompleteMe'
 endif
 
 " ctags plugin
@@ -62,6 +62,7 @@ Plugin 'hdima/python-syntax'
 Plugin 'bohlender/vim-smt2'
 Plugin 'dylon/vim-antlr'
 Plugin 'rust-lang/rust.vim'
+Plugin 'wlangstroth/vim-racket'
 
 " Code Formatting
 Plugin 'google/vim-codefmt'
