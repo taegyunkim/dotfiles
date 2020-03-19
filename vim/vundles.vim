@@ -37,6 +37,8 @@ Plugin 'vim-scripts/a.vim'
 " Quote/Parenthesis simple"
 Plugin 'tpope/vim-surround'
 Plugin 'Raimondi/delimitMate'
+Plugin 'vim-scripts/Rainbow-Parenthesis'
+
 " Snippets for vim"
 if v:version >= 704
   " Snippets for vim"
@@ -63,6 +65,7 @@ Plugin 'bohlender/vim-smt2'
 Plugin 'dylon/vim-antlr'
 Plugin 'rust-lang/rust.vim'
 Plugin 'wlangstroth/vim-racket'
+Plugin 'vim-scripts/scribble.vim'
 
 " Code Formatting
 Plugin 'google/vim-codefmt'
