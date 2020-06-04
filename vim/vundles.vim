@@ -66,6 +66,7 @@ Plugin 'dylon/vim-antlr'
 Plugin 'rust-lang/rust.vim'
 Plugin 'wlangstroth/vim-racket'
 Plugin 'vim-scripts/scribble.vim'
+Plugin 'leafgarland/typescript-vim'
 
 " Code Formatting
 Plugin 'google/vim-codefmt'
