@@ -46,13 +46,20 @@ else
   export GUROBI_HOME="/opt/gurobi811/linux64"
 fi
 
+export GOPATH=$HOME/golang
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+
 # Set the list of directories that Zsh searches for programs.
 path=(
   $HOME/.cargo/bin
   $HOME/.jenv/bin
   $HOME/.rbenv/bin
   $HOME/.pyenv/bin
+  $HOME/.krew/bin
   $HOME/.local/bin
+  $HOME/.wasme/bin
   $HOME/Workspace/domino-compiler
   $GUROBI_HOME/bin
   /usr/local/{bin,sbin}
@@ -60,8 +67,6 @@ path=(
   /usr/local/sketch-1.7.5/sketch-frontend
   $path
 )
-
-export GOPATH=$HOME/Workspace/golabs
 
 #
 # Less
