@@ -39,12 +39,6 @@ Plugin 'tpope/vim-surround'
 Plugin 'Raimondi/delimitMate'
 Plugin 'vim-scripts/Rainbow-Parenthesis'
 
-" Snippets for vim"
-if v:version >= 704
-  " Snippets for vim"
-  Plugin 'SirVer/ultisnips'
-endif
-
 " sessions for Vim
 Plugin 'tpope/vim-obsession'
 
