@@ -53,4 +53,6 @@ if [ -f '/Users/taegyunkim/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/taeg
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/taegyunkim/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/taegyunkim/google-cloud-sdk/completion.zsh.inc'; fi
 
-source <(kubectl completion zsh)
+if command -v kubectl; then
+  source <(kubectl completion zsh)
+fi
