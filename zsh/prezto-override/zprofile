@@ -56,7 +56,6 @@ path=(
   $HOME/.cargo/bin
   $HOME/.jenv/bin
   $HOME/.rbenv/bin
-  $HOME/.pyenv/bin
   $HOME/.krew/bin
   $HOME/.local/bin
   $HOME/.wasme/bin
@@ -83,4 +82,8 @@ if (( $+commands[lesspipe.sh] )); then
 fi
 
 export SKETCH_HOME=/usr/local/sketch-1.7.5/sketch-frontend/runtime
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
 
