@@ -53,7 +53,6 @@ endif
 Plugin 'xolox/vim-easytags'
 
 " Language plugins
-Plugin 'vhda/verilog_systemverilog.vim'
 Plugin 'hdima/python-syntax'
 Plugin 'bohlender/vim-smt2'
 Plugin 'dylon/vim-antlr'
@@ -61,6 +60,7 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'wlangstroth/vim-racket'
 Plugin 'vim-scripts/scribble.vim'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'whonore/Coqtail'
 
 " Code Formatting
 Plugin 'google/vim-codefmt'
