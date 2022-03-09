@@ -20,7 +20,6 @@ fi
 # Customize to your needs...
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-
   # How to install dir_colors solarized
   # 1. brew install coreutils
   # 2. git clone git@github.com:seebi/dircolors-solarized.git
@@ -35,17 +34,15 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   fi
 fi
 
-if [[ -s ~/.mintty-colors-solarized ]]; then
-  source ~/.mintty-colors-solarized/mintty-solarized-dark.sh
-fi
-
 if command -v rbenv 1> /dev/null 2>&1; then
-  eval "$(rbenv init -)"
+  eval "$(rbenv init - --no-rehash)"
 fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+# TODO: Use lazy loading
+# https://lakur.tech/2021/12/10/fix-slow-zsh-startup-nvm/
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"                   # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/taegyunkim/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/taegyunkim/google-cloud-sdk/path.zsh.inc'; fi
@@ -74,14 +71,15 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
 if command -v pyenv 1> /dev/null 2>&1; then
-  eval "$(pyenv init -)"
+  eval "$(pyenv init --path --no-rehash)"
 fi
 
 # opam configuration
 [[ ! -r /Users/taegyunkim/.opam/opam-init/init.zsh ]] || source /Users/taegyunkim/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
+# TODO: use https://github.com/matthieusb/zsh-sdkman for faster loading.
+# https://github.com/sdkman/sdkman-cli/issues/977
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+# export SDKMAN_DIR="$HOME/.sdkman"
+# [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
