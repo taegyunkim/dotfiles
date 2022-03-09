@@ -38,6 +38,7 @@ zstyle ':prezto:load' pmodule \
   'git' \
   'tmux' \
   'syntax-highlighting' \
+  'completion' \
   'history-substring-search' \
   'autosuggestions' \
   'prompt'
@@ -97,9 +98,9 @@ zstyle ':prezto:module:prompt' theme 'powerlevel10k'
 
 
 # %v - virtualenv name.
-zstyle ':prezto:module:python:virtualenv' initialize 1
-zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
-zstyle ':prezto:module:python:info:virtualenv' format 'virtualenv:%v'
+# zstyle ':prezto:module:python:virtualenv' initialize 1
+# zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
+# zstyle ':prezto:module:python:info:virtualenv' format 'virtualenv:%v'
 
 #
 # Screen
