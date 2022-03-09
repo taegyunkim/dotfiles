@@ -54,7 +54,6 @@ export PATH=$PATH:$GOROOT/bin
 # Set the list of directories that Zsh searches for programs.
 path=(
   $HOME/.cargo/bin
-  $HOME/.jenv/bin
   $HOME/.rbenv/bin
   $HOME/.krew/bin
   $HOME/.local/bin
