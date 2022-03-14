@@ -5,19 +5,36 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+if [[ -f "$HOME/.dotfiles/zsh/antigen/antigen.zsh" ]]; then
+  source "$HOME/.dotfiles/zsh/antigen/antigen.zsh"
 fi
 
-# Customize to your needs...
+antigen bundle colored-man-pages
+antigen bundle command-not-found
+antigen bundle git
+antigen bundle gnu-utils
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+antigen theme romkatv/powerlevel10k
+
+antigen apply
+
+# #
+# # Executes commands at the start of an interactive session.
+# #
+# # Authors:
+# #   Sorin Ionescu <sorin.ionescu@gmail.com>
+# #
+#
+# # Source Prezto.
+# if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+#   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+# fi
+#
+# # Customize to your needs...
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   # How to install dir_colors solarized
@@ -34,52 +51,52 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   fi
 fi
 
-if command -v rbenv 1> /dev/null 2>&1; then
-  eval "$(rbenv init - --no-rehash)"
-fi
-
-# TODO: Use lazy loading
-# https://lakur.tech/2021/12/10/fix-slow-zsh-startup-nvm/
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"                   # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/taegyunkim/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/taegyunkim/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/taegyunkim/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/taegyunkim/google-cloud-sdk/completion.zsh.inc'; fi
-
-# Check if 'kubectl' is a command in $PATH
-if [ $commands[kubectl] ]; then
-
-  # Placeholder 'kubectl' shell function:
-  # Will only be executed on the first call to 'kubectl'
-  kubectl() {
-
-    # Remove this function, subsequent calls will execute 'kubectl' directly
-    unfunction "$0"
-
-    # Load auto-completion
-    source <(kubectl completion zsh)
-
-    # Execute 'kubectl' binary
-    $0 "$@"
-  }
-fi
+# if command -v rbenv 1> /dev/null 2>&1; then
+#   eval "$(rbenv init - --no-rehash)"
+# fi
+#
+# # TODO: Use lazy loading
+# # https://lakur.tech/2021/12/10/fix-slow-zsh-startup-nvm/
+# # export NVM_DIR="$HOME/.nvm"
+# # [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"                   # This loads nvm
+# # [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+#
+# # The next line updates PATH for the Google Cloud SDK.
+# if [ -f '/Users/taegyunkim/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/taegyunkim/google-cloud-sdk/path.zsh.inc'; fi
+#
+# # The next line enables shell command completion for gcloud.
+# if [ -f '/Users/taegyunkim/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/taegyunkim/google-cloud-sdk/completion.zsh.inc'; fi
+#
+# # Check if 'kubectl' is a command in $PATH
+# if [ $commands[kubectl] ]; then
+#
+#   # Placeholder 'kubectl' shell function:
+#   # Will only be executed on the first call to 'kubectl'
+#   kubectl() {
+#
+#     # Remove this function, subsequent calls will execute 'kubectl' directly
+#     unfunction "$0"
+#
+#     # Load auto-completion
+#     source <(kubectl completion zsh)
+#
+#     # Execute 'kubectl' binary
+#     $0 "$@"
+#   }
+# fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-if command -v pyenv 1> /dev/null 2>&1; then
-  eval "$(pyenv init --path --no-rehash)"
-fi
-
-# opam configuration
-[[ ! -r /Users/taegyunkim/.opam/opam-init/init.zsh ]] || source /Users/taegyunkim/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
-
-# TODO: use https://github.com/matthieusb/zsh-sdkman for faster loading.
-# https://github.com/sdkman/sdkman-cli/issues/977
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-# export SDKMAN_DIR="$HOME/.sdkman"
-# [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+# if command -v pyenv 1> /dev/null 2>&1; then
+#   eval "$(pyenv init --path --no-rehash)"
+# fi
+#
+# # opam configuration
+# [[ ! -r /Users/taegyunkim/.opam/opam-init/init.zsh ]] || source /Users/taegyunkim/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+#
+# # TODO: use https://github.com/matthieusb/zsh-sdkman for faster loading.
+# # https://github.com/sdkman/sdkman-cli/issues/977
+# #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# # export SDKMAN_DIR="$HOME/.sdkman"
+# # [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
