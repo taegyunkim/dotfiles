@@ -9,8 +9,10 @@ if [[ -f "$HOME/.dotfiles/zsh/antigen/antigen.zsh" ]]; then
   source "$HOME/.dotfiles/zsh/antigen/antigen.zsh"
 fi
 
+antigen bundle ag
 antigen bundle colored-man-pages
 antigen bundle command-not-found
+antigen bundle common-aliases
 antigen bundle git
 antigen bundle gnu-utils
 antigen bundle zsh-users/zsh-autosuggestions
@@ -22,20 +24,6 @@ antigen theme romkatv/powerlevel10k
 
 antigen apply
 
-# #
-# # Executes commands at the start of an interactive session.
-# #
-# # Authors:
-# #   Sorin Ionescu <sorin.ionescu@gmail.com>
-# #
-#
-# # Source Prezto.
-# if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-#   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-# fi
-#
-# # Customize to your needs...
-
 if [[ "$OSTYPE" == "darwin"* ]]; then
   # How to install dir_colors solarized
   # 1. brew install coreutils
@@ -43,13 +31,15 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   # 3. cd dircolors-solarized
   # 4. ln -s ~/.dotfiles/dircolors-solarized/dircolors.256dark ~/.dir_colors
   # 5. insert following two lines in .zshrc
-  eval $(gdircolors ~/.dir_colors)
-  if [[ -x /usr/local/bin/gls ]]; then
-    alias ls='/usr/local/bin/gls --group-directories-first --color=auto'
-  elif [[ -x ~/homebrew/bin/gls ]]; then
-    alias ls='~/homebrew/bin/gls --group-directories-first --color=auto'
-  fi
+  alias dircolors=gdircolors
+  alias ls=gls
 fi
+
+if [[ -s "~/.dir_colors" ]]; then
+  eval $(dircolors ~/.dir_colors)
+fi
+
+alias ls='ls --group-directories-first --color=auto'
 
 # if command -v rbenv 1> /dev/null 2>&1; then
 #   eval "$(rbenv init - --no-rehash)"
