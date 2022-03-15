@@ -24,21 +24,9 @@ antigen theme romkatv/powerlevel10k
 
 antigen apply
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  # How to install dir_colors solarized
-  # 1. brew install coreutils
-  # 2. git clone git@github.com:seebi/dircolors-solarized.git
-  # 3. cd dircolors-solarized
-  # 4. ln -s ~/.dotfiles/dircolors-solarized/dircolors.256dark ~/.dir_colors
-  # 5. insert following two lines in .zshrc
-  alias dircolors=gdircolors
-  alias ls=gls
+if [[ -s "$HOME/.dir_colors" ]]; then
+  eval $(dircolors "$HOME/.dir_colors")
 fi
-
-if [[ -s "~/.dir_colors" ]]; then
-  eval $(dircolors ~/.dir_colors)
-fi
-
 alias ls='ls --group-directories-first --color=auto'
 
 # if command -v rbenv 1> /dev/null 2>&1; then
