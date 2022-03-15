@@ -25,6 +25,9 @@ antigen theme romkatv/powerlevel10k
 antigen apply
 
 if [[ -s "$HOME/.dir_colors" ]]; then
+  if [[ $OSTYPE == 'darwin'* ]]; then
+    alias dircolors=gdircolors
+  fi
   eval $(dircolors "$HOME/.dir_colors")
 fi
 alias ls='ls --group-directories-first --color=auto'
