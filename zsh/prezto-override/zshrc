@@ -40,7 +40,7 @@ if [[ -s "$HOME/.dir_colors" ]]; then
   fi
   eval $(dircolors "$HOME/.dir_colors")
 fi
-alias ls='ls --group-directories-first --color=auto'
+alias ls='ls --color=auto'
 
 # zsh options
 source ~/.dotfiles/zsh/completion.zsh
