@@ -5,6 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Antigen for zsh plugins/modules
 if [[ -f "$HOME/.dotfiles/zsh/antigen/antigen.zsh" ]]; then
   source "$HOME/.dotfiles/zsh/antigen/antigen.zsh"
 fi
@@ -28,6 +29,11 @@ antigen theme romkatv/powerlevel10k
 
 antigen apply
 
+# powerlevel10k config, to customize prompt, run `p10k configure` or
+# edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# colorful ls command
 if [[ -s "$HOME/.dir_colors" ]]; then
   if [[ $OSTYPE == 'darwin'* ]]; then
     alias dircolors=gdircolors
@@ -39,6 +45,9 @@ alias ls='ls --group-directories-first --color=auto'
 # zsh options
 source ~/.dotfiles/zsh/completion.zsh
 source ~/.dotfiles/zsh/history.zsh
+
+# --no-rehash to improve shell startup time.
+eval "$(pyenv init - --no-rehash)"
 
 # if command -v rbenv 1> /dev/null 2>&1; then
 #   eval "$(rbenv init - --no-rehash)"
@@ -72,13 +81,6 @@ source ~/.dotfiles/zsh/history.zsh
 #     # Execute 'kubectl' binary
 #     $0 "$@"
 #   }
-# fi
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# if command -v pyenv 1> /dev/null 2>&1; then
-#   eval "$(pyenv init --path --no-rehash)"
 # fi
 #
 # # opam configuration

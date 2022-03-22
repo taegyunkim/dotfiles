@@ -40,12 +40,6 @@ typeset -gU cdpath fpath mailpath path
 #   $cdpath
 # )
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  export GUROBI_HOME="/Library/gurobi811/mac64"
-else
-  export GUROBI_HOME="/opt/gurobi811/linux64"
-fi
-
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
@@ -58,8 +52,6 @@ path=(
   $HOME/.krew/bin
   $HOME/.local/bin
   $HOME/.wasme/bin
-  $HOME/Workspace/domino-compiler
-  $GUROBI_HOME/bin
   /usr/local/{bin,sbin}
   /usr/local/go/bin
   /usr/local/sketch-1.7.5/sketch-frontend
@@ -82,10 +74,8 @@ fi
 
 export SKETCH_HOME=/usr/local/sketch-1.7.5/sketch-frontend/runtime
 
-if command -v pyenv 1> /dev/null 2>&1; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init --path)"
-fi
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
 
 export MODULEPATH=$MODULEPATH:/usr/local/etc/modulefiles
