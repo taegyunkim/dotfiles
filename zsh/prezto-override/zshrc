@@ -9,16 +9,20 @@ if [[ -f "$HOME/.dotfiles/zsh/antigen/antigen.zsh" ]]; then
   source "$HOME/.dotfiles/zsh/antigen/antigen.zsh"
 fi
 
+# if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+#   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+# fi
+
 antigen bundle ag
 antigen bundle colored-man-pages
 antigen bundle command-not-found
 antigen bundle common-aliases
 antigen bundle git
 antigen bundle gnu-utils
-antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle zsh-users/zsh-autosuggestions
 
 antigen theme romkatv/powerlevel10k
 
@@ -31,6 +35,10 @@ if [[ -s "$HOME/.dir_colors" ]]; then
   eval $(dircolors "$HOME/.dir_colors")
 fi
 alias ls='ls --group-directories-first --color=auto'
+
+# zsh options
+source ~/.dotfiles/zsh/completion.zsh
+source ~/.dotfiles/zsh/history.zsh
 
 # if command -v rbenv 1> /dev/null 2>&1; then
 #   eval "$(rbenv init - --no-rehash)"
