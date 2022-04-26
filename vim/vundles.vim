@@ -19,7 +19,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Valloric/ListToggle'
-Plugin 'taegyunkim/vim-nightfall'
+Plugin 'vimpostor/vim-lumen'
 
 " File navigation
 " Tree file navigation
@@ -55,13 +55,13 @@ Plugin 'xolox/vim-easytags'
 
 " Language plugins
 Plugin 'hdima/python-syntax'
-Plugin 'bohlender/vim-smt2'
-Plugin 'dylon/vim-antlr'
+" Plugin 'bohlender/vim-smt2'
+" Plugin 'dylon/vim-antlr'
 Plugin 'rust-lang/rust.vim'
-Plugin 'wlangstroth/vim-racket'
-Plugin 'vim-scripts/scribble.vim'
+" Plugin 'wlangstroth/vim-racket'
+" Plugin 'vim-scripts/scribble.vim'
 Plugin 'leafgarland/typescript-vim'
-Plugin 'whonore/Coqtail'
+" Plugin 'whonore/Coqtail'
 
 " Code Formatting
 Plugin 'google/vim-codefmt'
