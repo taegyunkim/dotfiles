@@ -19,6 +19,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Valloric/ListToggle'
+Plugin 'jeffkreeftmeijer/vim-nightfall'
 
 " File navigation
 " Tree file navigation
