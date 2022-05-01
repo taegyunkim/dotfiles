@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+. "$HOME/.fig/shell/zprofile.pre.zsh"
 #
 # Executes commands at login pre-zshrc.
 #
@@ -79,3 +81,6 @@ eval "$(pyenv init --path)"
 export MODULEPATH=$MODULEPATH:/usr/local/etc/modulefiles
 
 export CMAKE_GENERATOR=Ninja
+
+# Fig post block. Keep at the bottom of this file.
+. "$HOME/.fig/shell/zprofile.post.zsh"
