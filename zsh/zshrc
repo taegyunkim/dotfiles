@@ -91,5 +91,7 @@ fi
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+alias rebuds="bluetoothctl remove 34:82:C5:05:EE:48; bluetoothctl scan on; bluetoothctl pair 34:82:C5:05:EE:48; bluetoothctl connect 34:82:C5:05:EE:48"
+
 # Fig post block. Keep at the bottom of this file.
 . "$HOME/.fig/shell/zshrc.post.zsh"
