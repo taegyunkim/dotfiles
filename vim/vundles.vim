@@ -19,7 +19,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Valloric/ListToggle'
-Plugin 'vimpostor/vim-lumen'
+" Plugin 'vimpostor/vim-lumen'
 
 " File navigation
 " Tree file navigation
