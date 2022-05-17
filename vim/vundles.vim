@@ -62,6 +62,7 @@ Plugin 'rust-lang/rust.vim'
 " Plugin 'vim-scripts/scribble.vim'
 Plugin 'leafgarland/typescript-vim'
 " Plugin 'whonore/Coqtail'
+Plugin 'memgraph/cypher.vim'
 
 " Code Formatting
 Plugin 'google/vim-codefmt'
