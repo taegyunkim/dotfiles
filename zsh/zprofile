@@ -78,7 +78,5 @@ eval "$(pyenv init --path)"
 
 export MODULEPATH=$MODULEPATH:/usr/local/etc/modulefiles
 
-export CMAKE_GENERATOR=Ninja
-
 # Fig post block. Keep at the bottom of this file.
 [ -s "$HOME/.fig/shell/zprofile.post.zsh" ] && .  "$HOME/.fig/shell/zprofile.post.zsh"
