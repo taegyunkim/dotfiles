@@ -48,7 +48,6 @@ export PATH=$PATH:$GOPATH/bin
 # Set the list of directories that Zsh searches for programs.
 path=(
   $HOME/.cargo/bin
-  $HOME/.rbenv/bin
   $HOME/.krew/bin
   $HOME/.local/bin
   $HOME/.wasme/bin

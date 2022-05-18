@@ -50,9 +50,6 @@ source ~/.dotfiles/zsh/history.zsh
 # --no-rehash to improve shell startup time.
 eval "$(pyenv init - --no-rehash)"
 
-# if command -v rbenv 1> /dev/null 2>&1; then
-#   eval "$(rbenv init - --no-rehash)"
-# fi
 #
 # # The next line updates PATH for the Google Cloud SDK.
 # if [ -f '/Users/taegyunkim/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/taegyunkim/google-cloud-sdk/path.zsh.inc'; fi
