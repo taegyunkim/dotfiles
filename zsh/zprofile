@@ -54,7 +54,6 @@ path=(
   $HOME/.wasme/bin
   /usr/local/{bin,sbin}
   /usr/local/go/bin
-  /usr/local/sketch-1.7.5/sketch-frontend
   $path
 )
 
