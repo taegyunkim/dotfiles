@@ -73,3 +73,4 @@ eval "$(pyenv init --path)"
 
 export MODULEPATH=$MODULEPATH:/usr/local/etc/modulefiles
 
+export PATH="/home/taegyunk/.local/share/velas/install/active_release/bin:$PATH"
