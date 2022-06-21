@@ -41,7 +41,7 @@ fi
 alias ls='ls --color=auto'
 
 # zsh options
-source ~/.dotfiles/zsh/completion.zsh
+# source ~/.dotfiles/zsh/completion.zsh
 source ~/.dotfiles/zsh/history.zsh
 
 #
