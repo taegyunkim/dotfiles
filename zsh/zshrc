@@ -18,6 +18,7 @@ antigen bundle common-aliases
 antigen bundle git
 antigen bundle gnu-utils
 antigen bundle nvm
+antigen bundle mroth/evalcache
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search
@@ -103,11 +104,8 @@ alias rebuds="bluetoothctl remove 34:82:C5:05:EE:48; bluetoothctl scan on; bluet
 bindkey -v '^?' backward-delete-char
 
 export PYENV_ROOT="$HOME/.pyenv"
-pyenv() {
-  command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init - --no-rehash zsh)"
-  pyenv "$@"
-}
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+_evalcache pyenv init - --no-rehash
 pyenv-brew-relink() {
   rm -f "$HOME/.pyenv/versions/*-brew"
   for i in $(brew --cellar)/python* ; do

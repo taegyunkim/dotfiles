@@ -73,4 +73,4 @@ export PATH="/home/taegyunk/.local/share/velas/install/active_release/bin:$PATH"
 
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - --no-rehash)"
+eval "$(pyenv init -)"
