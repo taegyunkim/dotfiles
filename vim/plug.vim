@@ -14,7 +14,6 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'Valloric/ListToggle'
-" Plug 'vimpostor/vim-lumen'
 
 " File navigation
 " Tree file navigation
@@ -55,14 +54,11 @@ if !isdirectory('~/.dotfiles-work')
   Plug 'ycm-core/YouCompleteMe', {'do': function('BuildYCM')}
 endif
 
-" ctags plugin
-Plug 'xolox/vim-easytags'
-
 " Language plugins
 Plug 'hdima/python-syntax'
 " Plug 'bohlender/vim-smt2'
 " Plug 'dylon/vim-antlr'
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " Plug 'wlangstroth/vim-racket'
 " Plug 'vim-scripts/scribble.vim'
 Plug 'leafgarland/typescript-vim'
