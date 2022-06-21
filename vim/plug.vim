@@ -1,5 +1,4 @@
 call plug#begin()
-Plug 'gmarik/Vundle.vim'
 
 Plug 'google/vim-maktaba'
 Plug 'xolox/vim-misc'
