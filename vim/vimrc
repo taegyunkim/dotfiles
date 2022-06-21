@@ -6,8 +6,8 @@ endif
 set nocompatible "Disable vi-compatibility
 
 " Load bundle list
-if filereadable(expand("~/.vim/vundles.vim"))
-  source ~/.vim/vundles.vim
+if filereadable(expand("~/.vim/plug.vim"))
+  source ~/.vim/plug.vim
 endif
 
 " General config
