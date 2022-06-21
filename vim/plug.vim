@@ -44,7 +44,7 @@ function! BuildYCM(info)
   " - status: 'installed', 'updated', or 'unchanged'
   " - force:  set on PlugInstall! or PlugUpdate!
   if a:info.status == 'installed' || a:info.force
-    !NVM_LAZY=0 python3 install.py --all
+    !python3 install.py --all
   endif
 endfunction
 
