@@ -76,4 +76,9 @@ Plug 'google/vim-glaive'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+" Github copilot
+if has('nvim')
+  Plug 'github/copilot.vim'
+endif
+
 call plug#end()
