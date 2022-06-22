@@ -9,7 +9,8 @@ if [[ -f "$HOME/.dotfiles/zsh/antigen/antigen.zsh" ]]; then
   source "$HOME/.dotfiles/zsh/antigen/antigen.zsh"
 fi
 
-export NVM_LAZY=1
+NVM_LAZY=1
+NVM_LAZY_CMD=('vim' 'nvim' 'code' 'npx')
 
 antigen bundle ag
 antigen bundle colored-man-pages
