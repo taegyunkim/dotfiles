@@ -65,6 +65,9 @@ Plug 'leafgarland/typescript-vim'
 Plug 'memgraph/cypher.vim'
 Plug 'TovarishFin/vim-solidity'
 
+" ctags plugin
+Plug 'ludovicchabant/vim-gutentags'
+
 " Code Formatting
 Plug 'google/vim-codefmt'
 Plug 'syml/rust-codefmt'
