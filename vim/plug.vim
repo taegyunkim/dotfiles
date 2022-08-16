@@ -47,7 +47,7 @@ function! BuildYCM(info)
 endfunction
 
 " Syntax checking
-Plug 'vim-syntastic/syntastic'
+Plug 'dense-analysis/ale'
 if !isdirectory('~/.dotfiles-work')
   " the ultimate autocompletion system for vim
   Plug 'ycm-core/YouCompleteMe', {'do': function('BuildYCM')}
