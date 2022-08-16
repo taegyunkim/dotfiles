@@ -77,8 +77,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Github copilot
-if has('nvim')
-  Plug 'github/copilot.vim'
-endif
+Plug 'github/copilot.vim'
 
 call plug#end()
