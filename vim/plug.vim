@@ -5,8 +5,10 @@ Plug 'xolox/vim-misc'
 " normalize async job control api for vim and neovim
 Plug 'prabirshrestha/async.vim'
 
+
 " async language server protocol plugin for vim and neovim
 Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
 
 " Vim appearance
 Plug 'altercation/vim-colors-solarized'
@@ -48,10 +50,14 @@ endfunction
 
 " Syntax checking
 Plug 'dense-analysis/ale'
+
+" Autocompletion
 if !isdirectory('~/.dotfiles-work')
   " the ultimate autocompletion system for vim
   Plug 'ycm-core/YouCompleteMe', {'do': function('BuildYCM')}
 endif
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " Language plugins
 Plug 'hdima/python-syntax'
