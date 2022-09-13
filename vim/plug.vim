@@ -52,7 +52,7 @@ endfunction
 Plug 'dense-analysis/ale'
 
 " Autocompletion
-if !isdirectory('~/.dotfiles-work')
+if !isdirectory('~/.dotfiles-work') && v:version >= 801
   " the ultimate autocompletion system for vim
   Plug 'ycm-core/YouCompleteMe', {'do': function('BuildYCM')}
 endif
