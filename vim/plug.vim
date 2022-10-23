@@ -73,7 +73,6 @@ Plug 'TovarishFin/vim-solidity'
 
 " Code Formatting
 Plug 'google/vim-codefmt'
-Plug 'syml/rust-codefmt'
 
 " Glaive, used to configure codefmt's maktaba flags.
 Plug 'google/vim-glaive'
