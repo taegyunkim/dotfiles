@@ -85,6 +85,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 alias rebuds="bluetoothctl remove 34:82:C5:05:EE:48; bluetoothctl scan on; bluetoothctl pair 34:82:C5:05:EE:48; bluetoothctl connect 34:82:C5:05:EE:48"
+alias resony="bluetoothctl remove F8:DF:15:45:B1:0E; bluetoothctl scan on; bluetoothctl pair F8:DF:15:45:B1:0E; bluetoothctl connect F8:DF:15:45:B1:0E"
 
 bindkey -v '^?' backward-delete-char
 
