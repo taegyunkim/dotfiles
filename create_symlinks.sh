@@ -8,7 +8,6 @@ ln -nfs ~/.dotfiles/vim ~/.vim
 ln -s ~/.dotfiles/vim/vimrc ~/.vimrc
 ln -nfs ~/.dotfiles/tmux ~/.tmux
 ln -s ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
-ln -s ~/.dotfiles/ycm_extra_conf.py ~/.ycm_extra_conf.py
 ln -s ~/.dotfiles/zsh/p10k.zsh ~/.p10k.zsh
 ln -s ~/.dotfiles/zsh/zlogin ~/.zlogin
 ln -s ~/.dotfiles/zsh/zlogout ~/.zlogout
