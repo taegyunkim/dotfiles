@@ -51,10 +51,11 @@ alias resony="bluetoothctl remove F8:DF:15:45:B1:0E; bluetoothctl scan on; bluet
 
 bindkey -v '^?' backward-delete-char
 
+# Pyenv installed with pyenv installer
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 # Use evalcache to improve Zsh startup time
-_evalcache pyenv init - --no-rehash
+_evalcache pyenv init -
 _evalcache pyenv virtualenv-init -
 
 pyenv-brew-relink() {

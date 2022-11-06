@@ -14,12 +14,11 @@ fi
 # Add zsh-completions to $fpath.
 fpath=(${0:h}/external/src $fpath)
 
-# Add completion for keg-only brewed curl when available.
-# if (( $+commands[brew] )) \
-#       && [[ -d "${curl_prefix::="$(brew --prefix 2> /dev/null)"/opt/curl}" ]]; then
-#   fpath=($curl_prefix/share/zsh/site-functions $fpath)
-# fi
-# unset curl_prefix
+# Homebrew completion
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
 
 #
 # Options
