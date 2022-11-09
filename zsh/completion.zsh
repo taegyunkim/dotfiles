@@ -11,8 +11,7 @@ if [[ $TERM == 'dumb' ]]; then
   return 1
 fi
 
-# Add zsh-completions to $fpath.
-fpath=(${0:h}/external/src $fpath)
+fpath=(${0:h}/completions $fpath)
 
 # Homebrew completion
 if type brew &>/dev/null
