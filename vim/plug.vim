@@ -61,6 +61,7 @@ Plug 'leafgarland/typescript-vim'
 " Plug 'whonore/Coqtail'
 Plug 'memgraph/cypher.vim'
 Plug 'TovarishFin/vim-solidity'
+Plug 'lervag/vimtex'
 
 " Code Formatting
 Plug 'google/vim-codefmt'
