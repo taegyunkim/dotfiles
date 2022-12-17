@@ -45,10 +45,7 @@ endfunction
 " Plug 'dense-analysis/ale'
 
 " Autocompletion
-if has('nvim') || (v:version >= 801)
-  " the ultimate autocompletion system for vim
-  Plug 'ycm-core/YouCompleteMe', {'do': function('BuildYCM')}
-endif
+Plug 'ycm-core/YouCompleteMe', {'do': function('BuildYCM')}
 
 " Language plugins
 Plug 'hdima/python-syntax'
@@ -62,6 +59,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'memgraph/cypher.vim'
 Plug 'TovarishFin/vim-solidity'
 Plug 'lervag/vimtex'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install global --yarn && yarn install' }
 
 " Code Formatting
 Plug 'google/vim-codefmt'
