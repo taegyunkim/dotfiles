@@ -52,6 +52,7 @@ alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 
 bindkey -v '^?' backward-delete-char
 
+export PYTHON_CONFIGURE_OPTS="--enable-framework"
 # Pyenv installed with pyenv installer
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
@@ -67,6 +68,7 @@ pyenv-brew-relink() {
   done
   pyenv rehash
 }
+source $(pyenv root)/completions/pyenv.zsh
 
 export COURSIER_BIN_DIR="$HOME/.local/share/coursier/bin"
 export PATH="$COURSIER_BIN_DIR:$PATH"
