@@ -59,7 +59,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'memgraph/cypher.vim'
 Plug 'TovarishFin/vim-solidity'
 Plug 'lervag/vimtex'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install global --yarn && yarn install' }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install --global yarn && yarn install' }
 
 " Code Formatting
 Plug 'google/vim-codefmt'
