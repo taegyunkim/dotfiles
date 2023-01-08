@@ -54,7 +54,7 @@ bindkey -v '^?' backward-delete-char
 
 case "$OSTYPE" in
   darwin*)
-    export PYTHON_CONFIGURE_OPTS="--enable-framework"
+    # export PYTHON_CONFIGURE_OPTS="--enable-framework"
   ;;
   linux*)
     export PYTHON_CONFIGURE_OPTS="--enable-shared"
