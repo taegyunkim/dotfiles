@@ -57,7 +57,7 @@ case "$OSTYPE" in
     # export PYTHON_CONFIGURE_OPTS="--enable-framework"
   ;;
   linux*)
-    export PYTHON_CONFIGURE_OPTS="--enable-shared"
+    # export PYTHON_CONFIGURE_OPTS="--enable-shared"
   ;;
 esac
 # Pyenv installed with pyenv installer
