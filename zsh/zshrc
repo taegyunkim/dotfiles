@@ -73,6 +73,8 @@ source $(pyenv root)/completions/pyenv.zsh
 export COURSIER_BIN_DIR="$HOME/.local/share/coursier/bin"
 export PATH="$COURSIER_BIN_DIR:$PATH"
 
+export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+
 if [[ $OSTYPE == 'linux-gnu' ]]; then
   export JAVA_HOME=/usr/lib/jvm/default-java
 fi
