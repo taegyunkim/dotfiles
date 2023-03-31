@@ -1,7 +1,7 @@
 [push]
 	default = current
 [core]
-	excludesfile = ~/.gitignore
+	excludesFile = ~/.gitignore
   ignorecase = false
 [alias]
   tree = log --graph --decorate --pretty=oneline --abbrev-commit
