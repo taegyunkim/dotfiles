@@ -4,6 +4,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+if [[ -f "$HOME/.dotfiles-work/zshrc" ]]; then
+  source "$HOME/.dotfiles-work/zshrc"
+fi
+
 # Antigen for zsh plugins/modules
 if [[ -f "$HOME/.dotfiles/zsh/antigen/antigen.zsh" ]]; then
   source "$HOME/.dotfiles/zsh/antigen/antigen.zsh"
@@ -51,7 +55,13 @@ alias resony="bluetoothctl remove F8:DF:15:45:B1:0E; bluetoothctl scan on; bluet
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 alias tm='tmux new -s `basename $PWD`'
 
+#to know the key binding for a key, run `od -c` and press the key
 bindkey -v '^?' backward-delete-char
+bindkey '^[[3~' delete-char           #enables DEL key proper behaviour
+bindkey '^[[1;5C' forward-word        #[Ctrl-RightArrow] - move forward one word
+bindkey '^[[1;5D' backward-word       #[Ctrl-LeftArrow] - move backward one word
+bindkey  "^[[H"   beginning-of-line   #[Home] - goes at the begining of the line
+bindkey  "^[[F"   end-of-line         #[End] - goes at the end of the line
 
 # Pyenv installed with pyenv installer
 export PYENV_ROOT="$HOME/.pyenv"
