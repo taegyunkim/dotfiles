@@ -45,7 +45,9 @@ endfunction
 " Plug 'dense-analysis/ale'
 
 " Autocompletion
-Plug 'ycm-core/YouCompleteMe', {'do': function('BuildYCM')}
+if empty("~/.dotfiles-work/vimrc")
+  Plug 'ycm-core/YouCompleteMe', {'do': function('BuildYCM')}
+endif
 
 " Language plugins
 Plug 'hdima/python-syntax'

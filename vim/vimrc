@@ -1,5 +1,5 @@
 if isdirectory(expand("~/.dotfiles-work"))
-  source ~/.dotfiles-work/vim/vimrc
+  source ~/.dotfiles-work/vimrc
 endif
 
 " Personal settings
