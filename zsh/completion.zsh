@@ -34,13 +34,6 @@ unsetopt MENU_COMPLETE      # Do not autoselect the first completion entry.
 unsetopt FLOW_CONTROL       # Disable start/stop characters in shell editor.
 
 #
-# Variables
-#
-
-# Standard style used by default for 'list-colors'
-LS_COLORS=${LS_COLORS}
-
-#
 # Initialization
 #
 
@@ -66,7 +59,7 @@ unset _comp_path
 #
 
 # Defaults.
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 
 # Use caching to make completion for commands such as dpkg and apt usable.
