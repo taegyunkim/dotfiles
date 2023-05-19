@@ -1,6 +1,8 @@
 call plug#begin()
 
-Plug 'google/vim-maktaba'
+if empty("~/.dotfiles-work/vimrc")
+  Plug 'google/vim-maktaba'
+endif
 Plug 'xolox/vim-misc'
 
 " Vim appearance
@@ -64,16 +66,22 @@ Plug 'lervag/vimtex'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install --global yarn && yarn install' }
 
 " Code Formatting
-Plug 'google/vim-codefmt'
+if empty("~/.dotfiles-work/vimrc")
+  Plug 'google/vim-codefmt'
+endif
 
 " Glaive, used to configure codefmt's maktaba flags.
-Plug 'google/vim-glaive'
+if empty("~/.dotfiles-work/vimrc")
+  Plug 'google/vim-glaive'
+endif
 
 " Git integration
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Github copilot
-Plug 'github/copilot.vim'
+if empty("~/.dotfiles-work/vimrc")
+  Plug 'github/copilot.vim'
+endif
 
 call plug#end()
