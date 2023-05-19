@@ -65,7 +65,7 @@ bindkey  "^[[F"   end-of-line         #[End] - goes at the end of the line
 
 # Pyenv installed with pyenv installer
 export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+command -v pyenv >/dev/null && export PATH="$PYENV_ROOT/bin:$PATH"
 # Use evalcache to improve Zsh startup time
 if command -v pyenv; then
   _evalcache pyenv init - --no-rehash --path
@@ -82,12 +82,16 @@ pyenv-brew-relink() {
   pyenv rehash
 }
 
-export COURSIER_BIN_DIR="$HOME/.local/share/coursier/bin"
-export PATH="$COURSIER_BIN_DIR:$PATH"
+if [[ -s "$HOME/.local/shares/coursier" ]]; then
+  export COURSIER_BIN_DIR="$HOME/.local/share/coursier/bin"
+  export PATH="$COURSIER_BIN_DIR:$PATH"
+fi
 
-export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+if [[ -s "/usr/local/cuda/bin" ]]; then
+  export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+fi
 
-if [[ $OSTYPE == 'linux-gnu' ]]; then
+if [[ $OSTYPE == 'linux-gnu' && -s "/usr/lib/jvm/default-java" ]]; then
   export JAVA_HOME=/usr/lib/jvm/default-java
 fi
 

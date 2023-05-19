@@ -22,7 +22,9 @@ if (($ + commands[lesspipe.sh])); then
 fi
 
 # For NYU HPC
-export MODULEPATH=$MODULEPATH:/usr/local/etc/modulefiles
+if [[ -s "/usr/local/etc/modulefiles" ]]; then
+  export MODULEPATH=$MODULEPATH:/usr/local/etc/modulefiles
+fi
 
 # Set PATH, MANPATH, etc., for Homebrew.
 if [ -x "/opt/homebrew/bin/brew" ]; then
