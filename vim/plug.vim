@@ -1,6 +1,6 @@
 call plug#begin()
 
-if empty("~/.dotfiles-work/vimrc")
+if empty(glob("~/.dotfiles-work/vimrc"))
   Plug 'google/vim-maktaba'
 endif
 Plug 'xolox/vim-misc'
@@ -66,12 +66,12 @@ Plug 'lervag/vimtex'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install --global yarn && yarn install' }
 
 " Code Formatting
-if empty("~/.dotfiles-work/vimrc")
+if empty(glob("~/.dotfiles-work/vimrc"))
   Plug 'google/vim-codefmt'
 endif
 
 " Glaive, used to configure codefmt's maktaba flags.
-if empty("~/.dotfiles-work/vimrc")
+if empty(glob("~/.dotfiles-work/vimrc"))
   Plug 'google/vim-glaive'
 endif
 
@@ -80,7 +80,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Github copilot
-if empty("~/.dotfiles-work/vimrc")
+if empty(glob("~/.dotfiles-work/vimrc"))
   Plug 'github/copilot.vim'
 endif
 
