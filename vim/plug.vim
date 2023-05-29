@@ -47,7 +47,7 @@ endfunction
 " Plug 'dense-analysis/ale'
 
 " Autocompletion
-if empty("~/.dotfiles-work/vimrc")
+if empty(glob("~/.dotfiles-work/vimrc"))
   Plug 'ycm-core/YouCompleteMe', {'do': function('BuildYCM')}
 endif
 
