@@ -20,7 +20,7 @@ antigen bundle ag
 antigen bundle colored-man-pages
 antigen bundle command-not-found
 antigen bundle common-aliases
-antigen bundle git
+# antigen bundle git
 antigen bundle gnu-utils
 antigen bundle nvm
 antigen bundle mroth/evalcache
