@@ -1,8 +1,26 @@
 call plug#begin()
 
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status != 'unchanged' || a:info.force
+    !python3 install.py --all
+  endif
+endfunction
+
 if empty(glob("~/.dotfiles-work/vimrc"))
   Plug 'google/vim-maktaba'
+  Plug 'ycm-core/YouCompleteMe', {'do': function('BuildYCM')}
+  " Code Formatting
+  Plug 'google/vim-codefmt'
+  " Glaive, used to configure codefmt's maktaba flags.
+  Plug 'google/vim-glaive'
+  " Copilot
+  Plug 'github/copilot.vim'
 endif
+
 Plug 'xolox/vim-misc'
 
 " Vim appearance
@@ -33,24 +51,6 @@ Plug 'vim-scripts/Rainbow-Parenthesis'
 " sessions for Vim
 Plug 'tpope/vim-obsession'
 
-function! BuildYCM(info)
-  " info is a dictionary with 3 fields
-  " - name:   name of the plugin
-  " - status: 'installed', 'updated', or 'unchanged'
-  " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status != 'unchanged' || a:info.force
-    !python3 install.py --all
-  endif
-endfunction
-
-" Syntax checking
-" Plug 'dense-analysis/ale'
-
-" Autocompletion
-if empty(glob("~/.dotfiles-work/vimrc"))
-  Plug 'ycm-core/YouCompleteMe', {'do': function('BuildYCM')}
-endif
-
 " Language plugins
 Plug 'hdima/python-syntax'
 " Plug 'bohlender/vim-smt2'
@@ -65,23 +65,8 @@ Plug 'TovarishFin/vim-solidity'
 Plug 'lervag/vimtex'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install --global yarn && yarn install' }
 
-" Code Formatting
-if empty(glob("~/.dotfiles-work/vimrc"))
-  Plug 'google/vim-codefmt'
-endif
-
-" Glaive, used to configure codefmt's maktaba flags.
-if empty(glob("~/.dotfiles-work/vimrc"))
-  Plug 'google/vim-glaive'
-endif
-
 " Git integration
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-
-" Github copilot
-if empty(glob("~/.dotfiles-work/vimrc"))
-  Plug 'github/copilot.vim'
-endif
 
 call plug#end()
