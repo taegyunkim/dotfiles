@@ -90,14 +90,16 @@ if [[ -s "/usr/local/cuda/bin" ]]; then
   export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
 fi
 
-if [[ $OSTYPE == 'linux-gnu' && -s "/usr/lib/jvm/default-java" ]]; then
-  export JAVA_HOME=/usr/lib/jvm/default-java
-fi
+if [[ ! -a  "$HOME/.dotfiles-work/zshrc" ]]; then
+  if [[ $OSTYPE == 'linux-gnu' && -s "/usr/lib/jvm/default-java" ]]; then
+    export JAVA_HOME=/usr/lib/jvm/default-java
+  fi
 
 # TODO: use https://github.com/matthieusb/zsh-sdkman for faster loading.
 # https://github.com/sdkman/sdkman-cli/issues/977
 # THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+  export SDKMAN_DIR="$HOME/.sdkman"
+  [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
