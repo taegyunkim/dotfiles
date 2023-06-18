@@ -28,3 +28,6 @@
 	email = k.taegyun@gmail.com
 [difftool "diffpdf"]
   cmd = diff-pdf --view \"$LOCAL\" \"$REMOTE\"
+[credential "https://git.overleaf.com"]
+  username = k.taegyun@gmail.com
+  helper = store
