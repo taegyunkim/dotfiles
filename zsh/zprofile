@@ -34,3 +34,4 @@ elif [ -x "/usr/local/bin/brew" ]; then
 fi
 
 export PATH="$(go env GOPATH)/bin:$PATH"
+export PATH="$HOME/.nimble/bin:$PATH"
