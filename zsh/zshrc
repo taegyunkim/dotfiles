@@ -54,21 +54,21 @@ alias rebuds="bluetoothctl remove 34:82:C5:05:EE:48; bluetoothctl scan on; bluet
 alias resony="bluetoothctl remove F8:DF:15:45:B1:0E; bluetoothctl scan on; bluetoothctl pair F8:DF:15:45:B1:0E; bluetoothctl connect F8:DF:15:45:B1:0E"
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 
-#to know the key binding for a key, run `od -c` and press the key
+# to know the key binding for a key, run `od -c` and press the key
 bindkey -v '^?' backward-delete-char
-bindkey '^[[3~' delete-char           #enables DEL key proper behaviour
-bindkey '^[[1;5C' forward-word        #[Ctrl-RightArrow] - move forward one word
-bindkey '^[[1;5D' backward-word       #[Ctrl-LeftArrow] - move backward one word
-bindkey  "^[[H"   beginning-of-line   #[Home] - goes at the begining of the line
-bindkey  "^[[F"   end-of-line         #[End] - goes at the end of the line
-bindkey  "^[[1~"   beginning-of-line   #[Home] - goes at the begining of the line
-bindkey  "^[[4~"   end-of-line         #[End] - goes at the end of the line
+bindkey '^[[3~' delete-char       # [DEL] key proper behaviour
+bindkey '^[[1;5C' forward-word    # [Ctrl-RightArrow] - move forward one word
+bindkey '^[[1;5D' backward-word   # [Ctrl-LeftArrow] - move backward one word
+bindkey "^[[H" beginning-of-line  # [Home] - goes at the begining of the line
+bindkey "^[[F" end-of-line        # [End] - goes at the end of the line
+bindkey "^[[1~" beginning-of-line # [Home] - goes at the begining of the line
+bindkey "^[[4~" end-of-line       # [End] - goes at the end of the line
 
 # Pyenv installed with pyenv installer
 export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+command -v pyenv > /dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 # Use evalcache to improve Zsh startup time
-if command -v pyenv > /dev/null ; then
+if command -v pyenv > /dev/null; then
   _evalcache pyenv init - --no-rehash --path
   _evalcache pyenv virtualenv-init -
   source $(pyenv root)/completions/pyenv.zsh
@@ -76,7 +76,7 @@ fi
 
 pyenv-brew-relink() {
   rm -f "$HOME/.pyenv/versions/*-brew"
-  for i in $(brew --cellar)/python* ; do
+  for i in $(brew --cellar)/python*; do
     echo "$i"
     ln -s -f -v "$i" "$HOME/.pyenv/versions/${i##/*/}-brew"
   done
@@ -92,14 +92,14 @@ if [[ -s "/usr/local/cuda/bin" ]]; then
   export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
 fi
 
-if [[ ! -a  "$HOME/.dotfiles-work/zshrc" ]]; then
+if [[ ! -e "$HOME/.dotfiles-work/zshrc" ]]; then
   if [[ $OSTYPE == 'linux-gnu' && -s "/usr/lib/jvm/default-java" ]]; then
     export JAVA_HOME=/usr/lib/jvm/default-java
   fi
 
-# TODO: use https://github.com/matthieusb/zsh-sdkman for faster loading.
-# https://github.com/sdkman/sdkman-cli/issues/977
-# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+  # TODO: use https://github.com/matthieusb/zsh-sdkman for faster loading.
+  # https://github.com/sdkman/sdkman-cli/issues/977
+  # THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
   export SDKMAN_DIR="$HOME/.sdkman"
   [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
