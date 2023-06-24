@@ -61,6 +61,8 @@ bindkey '^[[1;5C' forward-word        #[Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word       #[Ctrl-LeftArrow] - move backward one word
 bindkey  "^[[H"   beginning-of-line   #[Home] - goes at the begining of the line
 bindkey  "^[[F"   end-of-line         #[End] - goes at the end of the line
+bindkey  "^[[1~"   beginning-of-line   #[Home] - goes at the begining of the line
+bindkey  "^[[4~"   end-of-line         #[End] - goes at the end of the line
 
 # Pyenv installed with pyenv installer
 export PYENV_ROOT="$HOME/.pyenv"
