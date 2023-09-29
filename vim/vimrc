@@ -136,7 +136,3 @@ command! -register CopyMatches call CopyMatches(<q-reg>)
 
 " Automatically change the working path to the path of the current file
 autocmd BufNewFile,BufEnter * silent! lcd %:p:h
-
-" use » to mark Tabs and ° to mark trailing whitespace. This is a
-" non-obtrusive way to mark these special characters.
-set list listchars=tab:»\ ,trail:°
