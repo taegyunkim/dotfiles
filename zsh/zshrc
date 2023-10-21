@@ -14,7 +14,7 @@ if [[ -f "$HOME/.dotfiles/zsh/antigen/antigen.zsh" ]]; then
 fi
 
 zstyle ':omz:plugins:nvm' lazy yes
-zstyle ':omz:plugins:nvm' lazy-cmd vim nvim code npx
+zstyle ':omz:plugins:nvm' lazy-cmd vim nvim code
 
 antigen bundle ag
 antigen bundle colored-man-pages
