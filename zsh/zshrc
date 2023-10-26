@@ -102,4 +102,8 @@ if [[ ! -e "$HOME/.dotfiles-work/zshrc" ]]; then
   [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
 
+if [[ -r ~/.opam/opam-init/init.zsh ]]; then
+  source ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null
+fi
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
