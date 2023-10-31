@@ -18,7 +18,9 @@ endfunction
 
 if empty(glob("~/.dotfiles-work/vimrc"))
   Plug 'google/vim-maktaba'
-  Plug 'ycm-core/YouCompleteMe', {'do': function('BuildYCM')}
+  if has('python3')
+    Plug 'ycm-core/YouCompleteMe', {'do': function('BuildYCM')}
+  endif
   " Code Formatting
   Plug 'google/vim-codefmt'
   " Glaive, used to configure codefmt's maktaba flags.
