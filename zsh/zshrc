@@ -52,6 +52,7 @@ source ~/.dotfiles/zsh/history.zsh
 
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 alias vpn='sudo openconnect --background --user tk2374 --authgroup "NYU VPN: NYU-NET Traffic Only" vpn.nyu.edu'
+alias killvpn='sudo killall -SIGINT openconnect'
 
 # to know the key binding for a key, run `od -c` and press the key
 bindkey -v '^?' backward-delete-char
@@ -75,7 +76,7 @@ fi
 
 pyenv-brew-relink() {
   rm -f "$HOME/.pyenv/versions/*-brew"
-  for i in $(brew --cellar)/python*; do
+  for i in $(brew --cellar)/python@*; do
     echo "$i"
     ln -s -f -v "$i" "$HOME/.pyenv/versions/${i##/*/}-brew"
   done
