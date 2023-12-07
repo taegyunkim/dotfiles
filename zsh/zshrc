@@ -51,6 +51,7 @@ source ~/.dotfiles/zsh/completion.zsh
 source ~/.dotfiles/zsh/history.zsh
 
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+alias vpn='sudo openconnect --background --user tk2374 --authgroup "NYU VPN: NYU-NET Traffic Only" vpn.nyu.edu'
 
 # to know the key binding for a key, run `od -c` and press the key
 bindkey -v '^?' backward-delete-char
