@@ -70,8 +70,8 @@ Plug 'leafgarland/typescript-vim'
 " Plug 'whonore/Coqtail'
 Plug 'memgraph/cypher.vim'
 Plug 'TovarishFin/vim-solidity'
-Plug 'lervag/vimtex'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install --global yarn && yarn install' }
+" Plug 'lervag/vimtex'
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install --global yarn && yarn install' }
 
 " Git integration
 Plug 'tpope/vim-fugitive'
