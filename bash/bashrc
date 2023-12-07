@@ -1,3 +1,12 @@
+# Get CIMS defaults
+#
+if [ -r /usr/local/lib/.system.bashrc ] ; then
+    . /usr/local/lib/.system.bashrc
+fi
+
+# Make individual customizations, such as aliases, below.
+
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
