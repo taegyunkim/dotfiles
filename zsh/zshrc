@@ -70,7 +70,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv > /dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 # Use evalcache to improve Zsh startup time
 if command -v pyenv > /dev/null; then
-  _evalcache pyenv init - --no-rehash
+  _evalcache pyenv init - --path --no-rehash
   _evalcache pyenv virtualenv-init -
   source $(pyenv root)/completions/pyenv.zsh
 fi
