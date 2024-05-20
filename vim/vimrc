@@ -1,4 +1,4 @@
-if isdirectory(expand("~/.dotfiles-work"))
+if !empty(glob("~/.dotfiles-work/vimrc"))
   source ~/.dotfiles-work/vimrc
 endif
 
