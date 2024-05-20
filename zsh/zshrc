@@ -64,6 +64,9 @@ bindkey "^[[H" beginning-of-line  # [Home] - goes at the begining of the line
 bindkey "^[[F" end-of-line        # [End] - goes at the end of the line
 bindkey "^[[1~" beginning-of-line # [Home] - goes at the begining of the line
 bindkey "^[[4~" end-of-line       # [End] - goes at the end of the line
+bindkey '^[[A' history-substring-search-up # or '\eOA'
+bindkey '^[[B' history-substring-search-down # or '\eOB'
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
 # Pyenv installed with pyenv installer
 export PYENV_ROOT="$HOME/.pyenv"
