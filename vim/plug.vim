@@ -26,7 +26,7 @@ if empty(glob("~/.dotfiles-work/vimrc"))
   " Glaive, used to configure codefmt's maktaba flags.
   Plug 'google/vim-glaive'
   " Copilot
-  " Plug 'github/copilot.vim'
+  Plug 'github/copilot.vim'
 endif
 
 Plug 'xolox/vim-misc'
