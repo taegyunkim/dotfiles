@@ -71,9 +71,6 @@ set scrolloff=8
 set sidescrolloff=15
 set sidescroll=1
 set mouse=a " Enabling mouse scrolling
-if !has('nvim')
-  set ttymouse=xterm2
-endif
 
 " Completion
 set wildmode=list:longest
