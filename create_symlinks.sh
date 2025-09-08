@@ -14,4 +14,4 @@ ln -s ~/.dotfiles/zsh/zprofile ~/.zprofile
 ln -s ~/.dotfiles/zsh/zshenv ~/.zshenv
 ln -s ~/.dotfiles/zsh/zshrc ~/.zshrc
 mkdir -p ~/.config/nvim && ln -s ~/.dotfiles/nvim/init.vim ~/.config/nvim/init.vim
-mkdir -p ~/.local/share && ln -s ~/.vim ~/.local/share/nvim
+mkdir -p ~/.local/share && ln -nfs ~/.dotfiles/vim ~/.local/share/nvim
