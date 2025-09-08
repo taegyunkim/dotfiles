@@ -12,8 +12,6 @@ if empty(glob("~/.dotfiles-work/vimrc"))
   Plug 'google/vim-codefmt'
   " Glaive, used to configure codefmt's maktaba flags.
   Plug 'google/vim-glaive'
-  " Copilot
-  Plug 'github/copilot.vim'
 endif
 
 Plug 'xolox/vim-misc'
@@ -55,8 +53,7 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " Plug 'vim-scripts/scribble.vim'
 Plug 'leafgarland/typescript-vim'
 " Plug 'whonore/Coqtail'
-Plug 'memgraph/cypher.vim'
-Plug 'TovarishFin/vim-solidity'
+" Plug 'memgraph/cypher.vim'
 " Plug 'lervag/vimtex'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install --global yarn && yarn install' }
 
