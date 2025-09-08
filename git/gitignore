@@ -2,6 +2,7 @@
 
 vim/backups
 vim/plugged
+vim/site
 
 # exuberant ctags
 tags
