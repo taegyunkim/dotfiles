@@ -15,8 +15,6 @@ if filereadable(expand("~/.vim/plug.vim"))
   source ~/.vim/plug.vim
 endif
 
-set bg=light
-
 " General config
 set number " Line numbers are good
 set backspace=indent,eol,start
