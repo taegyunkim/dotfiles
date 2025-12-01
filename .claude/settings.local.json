@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(source:*)",
+      "Bash(autoload -U compinit)",
+      "Bash(compinit)",
+      "Bash(echo $FPATH)",
+      "Bash(find:*)",
+      "Bash(rm:*)",
+      "Bash(mv:*)",
+      "Bash(unfunction:*)",
+      "Bash(autoload -U _docker)",
+      "Bash(docker:*)",
+      "Bash(unset _comps[docker])",
+      "Bash(zsh:*)",
+      "Bash(setopt)"
+    ],
+    "deny": []
+  }
+}

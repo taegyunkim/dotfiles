@@ -1,0 +1,86 @@
+#compdef docker
+
+# Custom completion function for docker container logs with better formatting
+__docker_container_logs_completion() {
+    local -a running_containers stopped_containers
+    local container_info name id container_status created image age_info
+    
+    # Get all containers with their status, name, ID, age, and image
+    container_info=$(docker ps -a --format "{{.Names}}\t{{.ID}}\t{{.Status}}\t{{.CreatedAt}}\t{{.Image}}" 2>/dev/null)
+    
+    if [[ -z "$container_info" ]]; then
+        return 1
+    fi
+    
+    # Parse running and stopped containers
+    while IFS=$'\t' read -r name id container_status created image; do
+        # Extract age information from status
+        if [[ "$container_status" =~ "ago" ]]; then
+            # For stopped containers: "Exited (0) 12 days ago" -> "12 days"
+            age_info=$(echo "$container_status" | sed -E 's/.* ([0-9]+ [a-z]+) ago.*/\1/')
+        elif [[ "$container_status" =~ "Up" ]]; then
+            # For running containers: "Up 5 days" -> "5 days"
+            age_info=$(echo "$container_status" | sed -E 's/Up ([0-9]+ [a-z]+).*/\1/')
+            if [[ "$age_info" == "$container_status" ]]; then
+                # If no time extracted, it's just "Up"
+                age_info="recently"
+            fi
+        else
+            age_info="unknown"
+        fi
+        
+        # Group by container status
+        if [[ "$container_status" =~ ^Up ]]; then
+            running_containers+=("$name:$id -- $age_info, $image")
+        else
+            stopped_containers+=("$name:$id -- $age_info, $image")
+        fi
+    done <<< "$container_info"
+    
+    # Display completions with proper grouping using separate _describe calls
+    local ret=1
+    
+    if [[ ${#running_containers[@]} -gt 0 ]]; then
+        _describe -t running-containers 'running containers' running_containers && ret=0
+    fi
+    
+    if [[ ${#stopped_containers[@]} -gt 0 ]]; then
+        _describe -t stopped-containers 'stopped containers' stopped_containers && ret=0
+    fi
+    
+    return ret
+}
+
+# Main docker completion function
+_docker() {
+    # Check if we're completing docker logs commands and we're at the container name position
+    if [[ ($words[2] == "container" && $words[3] == "logs" && $CURRENT -eq 4) || 
+          ($words[2] == "logs" && $CURRENT -eq 3) ]]; then
+        __docker_container_logs_completion
+        return
+    fi
+    
+    # For all other docker commands, use docker's built-in completion
+    local out
+    out=$(docker __complete "${words[2,-1]}" 2>/dev/null)
+    if [[ $? -eq 0 && -n "$out" ]]; then
+        local -a completions
+        while IFS=$'\n' read -r comp; do
+            if [[ -n "$comp" && "$comp" != ":"* ]]; then
+                # Replace tabs with colons for _describe format
+                comp=${comp//	/:}
+                completions+=("$comp")
+            fi
+        done <<< "$out"
+        
+        if [[ ${#completions[@]} -gt 0 ]]; then
+            _describe 'docker' completions
+            return 0
+        fi
+    fi
+    
+    # Fallback to basic file completion
+    _files
+}
+
+# The #compdef directive at the top handles registration

@@ -11,13 +11,13 @@ if [[ $TERM == 'dumb' ]]; then
   return 1
 fi
 
-fpath=(${0:h}/completions $fpath)
-
-# Homebrew completion
+# Homebrew completion (load first so we can override)
 if type brew &>/dev/null
 then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
+
+fpath=(${0:h}/completions $fpath)
 
 #
 # Options
