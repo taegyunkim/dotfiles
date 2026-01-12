@@ -13,7 +13,16 @@
       "Bash(docker:*)",
       "Bash(unset _comps[docker])",
       "Bash(zsh:*)",
-      "Bash(setopt)"
+      "Bash(setopt)",
+      "Bash(ls:*)",
+      "Bash(scfw:*)",
+      "Bash(echo:*)",
+      "Bash(SCFW_DD_LOG_LEVEL=DEBUG scfw run:*)",
+      "Bash(export:*)",
+      "Bash(ssh-add:*)",
+      "Bash(dd-gitsign:*)",
+      "Bash(ssh-add:*)",
+      "Bash(ln:*)"
     ],
     "deny": []
   }
