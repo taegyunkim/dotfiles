@@ -35,3 +35,4 @@ tmux/resurrect
 compile_commands.json
 
 .cache/
+.claude/
