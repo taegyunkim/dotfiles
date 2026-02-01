@@ -18,6 +18,7 @@ antigen bundle command-not-found
 antigen bundle common-aliases
 # antigen bundle git
 antigen bundle gnu-utils
+# antigen bundle rkh/zsh-jj
 antigen bundle nvm
 antigen bundle mroth/evalcache
 antigen bundle zsh-users/zsh-completions
