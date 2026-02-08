@@ -41,9 +41,10 @@ fi
 # colorful ls command
 if [[ -s "$HOME/.dir_colors" ]]; then
   if [[ $OSTYPE == 'darwin'* ]]; then
-    alias dircolors=gdircolors
+    _evalcache gdircolors "$HOME/.dir_colors"
+  else
+    _evalcache dircolors "$HOME/.dir_colors"
   fi
-  eval $(dircolors "$HOME/.dir_colors")
 fi
 alias ls='ls --color=auto'
 
@@ -77,8 +78,9 @@ if [[ ! -e "$HOME/.dotfiles-work/zshrc" ]]; then
   command -v pyenv > /dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
   # Use evalcache to improve Zsh startup time
   if command -v pyenv > /dev/null; then
-    _evalcache pyenv init -
-    _evalcache pyenv virtualenv-init -
+    _evalcache pyenv init - --no-push-path --no-rehash
+    # pyenv virtualenv-init disabled (~1.2s precmd penalty per command).
+    # Use `pyenv activate <env>` / `pyenv deactivate` manually.
   fi
 fi
 
