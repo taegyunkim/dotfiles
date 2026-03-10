@@ -1,7 +1,7 @@
 {
   "claude-plugins-official": {
     "installLocation": "/Users/taegyun.kim/.claude/plugins/marketplaces/claude-plugins-official",
-    "lastUpdated": "2026-03-10T21:28:55.295Z",
+    "lastUpdated": "2026-03-10T22:42:30.391Z",
     "source": {
       "repo": "anthropics/claude-plugins-official",
       "source": "github"

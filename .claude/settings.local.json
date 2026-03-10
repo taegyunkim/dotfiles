@@ -39,7 +39,15 @@
       "mcp__plugin_atlassian_atlassian__searchJiraIssuesUsingJql",
       "Bash(git fetch:*)",
       "Bash(gh api:*)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(claude plugins:*)",
+      "Bash(claude mcp:*)",
+      "WebSearch",
+      "WebFetch(domain:docs.slack.dev)",
+      "Bash(python3 -m json.tool)",
+      "Bash(python3 -c \"\nimport json\nwith open\\('/Users/taegyun.kim/.claude.json'\\) as f:\n    data = json.load\\(f\\)\ndel data['mcpServers']['slack']\nwith open\\('/Users/taegyun.kim/.claude.json', 'w'\\) as f:\n    json.dump\\(data, f, indent=4\\)\nprint\\('Removed slack from mcpServers'\\)\n\")",
+      "Bash(bash claude/export.sh)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }
