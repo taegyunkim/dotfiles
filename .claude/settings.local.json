@@ -22,7 +22,24 @@
       "Bash(ssh-add:*)",
       "Bash(dd-gitsign:*)",
       "Bash(ssh-add:*)",
-      "Bash(ln:*)"
+      "Bash(ln:*)",
+      "Bash(cp -r /Users/taegyun.kim/.claude/commands /Users/taegyun.kim/.dotfiles/claude/commands)",
+      "Bash(cp -r /Users/taegyun.kim/.claude/hooks /Users/taegyun.kim/.dotfiles/claude/hooks)",
+      "Bash(cat /Users/taegyun.kim/.claude/plugins/*/server-config.json 2>/dev/null; ls /Users/taegyun.kim/.claude/plugins/)",
+      "Bash(cp /Users/taegyun.kim/.claude/plugins/installed_plugins.json /Users/taegyun.kim/.dotfiles/claude/installed_plugins.json && cp /Users/taegyun.kim/.claude/plugins/known_marketplaces.json /Users/taegyun.kim/.dotfiles/claude/known_marketplaces.json)",
+      "Bash(chmod +x /Users/taegyun.kim/.dotfiles/claude/install.sh)",
+      "Bash(bash claude/install.sh)",
+      "Bash(bash /Users/taegyun.kim/.dotfiles/claude/export.sh)",
+      "Bash(bash /Users/taegyun.kim/.dotfiles/claude/install.sh)",
+      "mcp__atlassian__getAccessibleAtlassianResources",
+      "mcp__plugin_atlassian_atlassian__getAccessibleAtlassianResources",
+      "mcp__atlassian__atlassianUserInfo",
+      "mcp__plugin_atlassian_atlassian__atlassianUserInfo",
+      "mcp__atlassian__searchJiraIssuesUsingJql",
+      "mcp__plugin_atlassian_atlassian__searchJiraIssuesUsingJql",
+      "Bash(git fetch:*)",
+      "Bash(gh api:*)",
+      "Bash(git pull:*)"
     ],
     "deny": []
   }

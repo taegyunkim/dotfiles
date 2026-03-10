@@ -1,0 +1,73 @@
+{
+  "enabledPlugins": {
+    "clangd-lsp@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "command": "bash ~/.dotfiles/claude/notify.sh",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "~/.claude-code-docs/claude-docs-helper.sh hook-check",
+            "type": "command"
+          }
+        ],
+        "matcher": "Read"
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "command": "bash ~/.dotfiles/claude/stop.sh",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "WorktreeCreate": [
+      {
+        "hooks": [
+          {
+            "command": "bash ~/.claude/hooks/worktree-create.sh",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "WorktreeRemove": [
+      {
+        "hooks": [
+          {
+            "command": "bash ~/.claude/hooks/worktree-remove.sh",
+            "type": "command"
+          }
+        ]
+      }
+    ]
+  },
+  "model": "opus[1m]",
+  "permissions": {
+    "allow": [
+      "Bash(cargo test:*)",
+      "Bash(cargo clippy:*)",
+      "Bash(cargo doc:*)",
+      "Bash(cargo build:*)",
+      "Bash(cargo tree:*)",
+      "Bash(git log:*)"
+    ]
+  }
+}
