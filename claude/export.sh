@@ -7,15 +7,18 @@ set -euo pipefail
 BASE_DIR="${BASE_DIR:-$HOME/.dotfiles/claude}"
 WORK_DIR="${WORK_DIR:-$HOME/.dotfiles-work/claude}"
 CLAUDE_DIR="${CLAUDE_DIR:-$HOME/.claude}"
+CLAUDE_STATE_FILE="${CLAUDE_STATE_FILE:-$HOME/.claude.json}"
 DISABLED_WORK_PLUGINS='["slack@claude-plugins-official"]'
 
 SETTINGS_FILE="$CLAUDE_DIR/settings.json"
 INSTALLED_PLUGINS_FILE="$CLAUDE_DIR/plugins/installed_plugins.json"
 KNOWN_MARKETPLACES_FILE="$CLAUDE_DIR/plugins/known_marketplaces.json"
 BASE_SETTINGS_FILE="$BASE_DIR/settings.json"
+BASE_MCP_SERVERS_FILE="$BASE_DIR/mcp_servers.json"
 WORK_ENABLED_PLUGINS_FILE="$WORK_DIR/enabled_plugins.json"
 WORK_INSTALLED_PLUGINS_FILE="$WORK_DIR/installed_plugins.json"
 WORK_KNOWN_MARKETPLACES_FILE="$WORK_DIR/known_marketplaces.json"
+WORK_MCP_SERVERS_FILE="$WORK_DIR/mcp_servers.json"
 
 for file in "$SETTINGS_FILE" "$INSTALLED_PLUGINS_FILE" "$KNOWN_MARKETPLACES_FILE"; do
   if [[ ! -f "$file" ]]; then
@@ -34,6 +37,19 @@ if [[ -f "$WORK_KNOWN_MARKETPLACES_FILE" ]]; then
   jq -S 'keys' "$WORK_KNOWN_MARKETPLACES_FILE" > "$work_marketplaces_keys_file"
 else
   printf '[]\n' > "$work_marketplaces_keys_file"
+fi
+
+work_mcp_servers_keys_file="$tmp_dir/work-mcp-servers-keys.json"
+if [[ -f "$WORK_MCP_SERVERS_FILE" ]]; then
+  jq -S 'keys' "$WORK_MCP_SERVERS_FILE" > "$work_mcp_servers_keys_file"
+else
+  printf '[]\n' > "$work_mcp_servers_keys_file"
+fi
+
+if [[ -f "$CLAUDE_STATE_FILE" ]]; then
+  jq -S '.mcpServers // {}' "$CLAUDE_STATE_FILE" > "$tmp_dir/live-mcp-servers.json"
+else
+  printf '{}\n' > "$tmp_dir/live-mcp-servers.json"
 fi
 
 if [[ -f "$BASE_SETTINGS_FILE" ]]; then
@@ -118,9 +134,26 @@ jq -S \
   "$KNOWN_MARKETPLACES_FILE" \
   > "$tmp_dir/work-known-marketplaces.json"
 
+jq -S \
+  --slurpfile work_mcp_servers "$work_mcp_servers_keys_file" \
+  'with_entries(
+     select(.key as $name | ($work_mcp_servers[0] | index($name) | not))
+   )' \
+  "$tmp_dir/live-mcp-servers.json" \
+  > "$tmp_dir/base-mcp-servers.json"
+
+jq -S \
+  --slurpfile work_mcp_servers "$work_mcp_servers_keys_file" \
+  'with_entries(
+     select(.key as $name | ($work_mcp_servers[0] | index($name)))
+   )' \
+  "$tmp_dir/live-mcp-servers.json" \
+  > "$tmp_dir/work-mcp-servers.json"
+
 mv "$tmp_dir/base-settings.json" "$BASE_SETTINGS_FILE"
 mv "$tmp_dir/base-installed-plugins.json" "$BASE_DIR/installed_plugins.json"
 mv "$tmp_dir/base-known-marketplaces.json" "$BASE_DIR/known_marketplaces.json"
+mv "$tmp_dir/base-mcp-servers.json" "$BASE_MCP_SERVERS_FILE"
 echo "Exported base Claude plugin state to $BASE_DIR"
 
 if [[ -d "$WORK_DIR" || -f "$WORK_ENABLED_PLUGINS_FILE" || -f "$WORK_INSTALLED_PLUGINS_FILE" || -f "$WORK_KNOWN_MARKETPLACES_FILE" ]]; then
@@ -132,4 +165,12 @@ if [[ -d "$WORK_DIR" || -f "$WORK_ENABLED_PLUGINS_FILE" || -f "$WORK_INSTALLED_P
 else
   rm -f "$tmp_dir/work-enabled-plugins.json" "$tmp_dir/work-installed-plugins.json" "$tmp_dir/work-known-marketplaces.json"
   echo "No work Claude overlay detected; skipped work export"
+fi
+
+if [[ -f "$WORK_MCP_SERVERS_FILE" ]]; then
+  mkdir -p "$WORK_DIR"
+  mv "$tmp_dir/work-mcp-servers.json" "$WORK_MCP_SERVERS_FILE"
+  echo "Exported work Claude MCP state to $WORK_DIR"
+else
+  rm -f "$tmp_dir/work-mcp-servers.json"
 fi

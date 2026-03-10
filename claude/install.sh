@@ -4,9 +4,10 @@
 
 set -euo pipefail
 
-BASE_DIR="$HOME/.dotfiles/claude"
-WORK_DIR="$HOME/.dotfiles-work/claude"
-CLAUDE_DIR="$HOME/.claude"
+BASE_DIR="${BASE_DIR:-$HOME/.dotfiles/claude}"
+WORK_DIR="${WORK_DIR:-$HOME/.dotfiles-work/claude}"
+CLAUDE_DIR="${CLAUDE_DIR:-$HOME/.claude}"
+CLAUDE_STATE_FILE="${CLAUDE_STATE_FILE:-$HOME/.claude.json}"
 DISABLED_WORK_PLUGINS='["slack@claude-plugins-official"]'
 
 mkdir -p "$CLAUDE_DIR/plugins"
@@ -74,6 +75,47 @@ else
     "$BASE_DIR/known_marketplaces.json" \
     > "$CLAUDE_DIR/plugins/known_marketplaces.json"
   echo "Copied known_marketplaces.json (base only)"
+fi
+
+# Merge user-scope MCP servers into ~/.claude.json while preserving runtime state.
+if [[ -f "$BASE_DIR/mcp_servers.json" || -f "$WORK_DIR/mcp_servers.json" ]]; then
+  tmp_dir="$(mktemp -d)"
+  trap 'rm -rf "$tmp_dir"' EXIT
+
+  if [[ -f "$CLAUDE_STATE_FILE" ]]; then
+    cp "$CLAUDE_STATE_FILE" "$tmp_dir/claude-state.json"
+  else
+    printf '{}\n' > "$tmp_dir/claude-state.json"
+  fi
+
+  if [[ -f "$BASE_DIR/mcp_servers.json" ]]; then
+    cp "$BASE_DIR/mcp_servers.json" "$tmp_dir/base-mcp-servers.json"
+  else
+    printf '{}\n' > "$tmp_dir/base-mcp-servers.json"
+  fi
+
+  if [[ -f "$WORK_DIR/mcp_servers.json" ]]; then
+    cp "$WORK_DIR/mcp_servers.json" "$tmp_dir/work-mcp-servers.json"
+  else
+    printf '{}\n' > "$tmp_dir/work-mcp-servers.json"
+  fi
+
+  jq -s \
+    '.[0] as $existing
+     | .[1] as $base
+     | .[2] as $work
+     | $existing * {
+         mcpServers: (
+           ($existing.mcpServers // {})
+           + $base
+           + $work
+         )
+       }' \
+    "$tmp_dir/claude-state.json" \
+    "$tmp_dir/base-mcp-servers.json" \
+    "$tmp_dir/work-mcp-servers.json" \
+    > "$CLAUDE_STATE_FILE"
+  echo "Merged mcp_servers.json into ~/.claude.json"
 fi
 
 echo "Claude Code configuration installed."
