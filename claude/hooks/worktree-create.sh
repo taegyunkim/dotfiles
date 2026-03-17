@@ -7,7 +7,7 @@ INPUT=$(cat)
 NAME=$(echo "$INPUT" | jq -r '.name')
 CWD=$(echo "$INPUT" | jq -r '.cwd')
 
-DIR="$CWD/.claude/worktrees/$NAME"
+DIR="$CWD/.worktrees/$NAME"
 mkdir -p "$(dirname "$DIR")"
 
 git worktree add -b "$NAME" "$DIR" HEAD >&2 2>&1 || {
