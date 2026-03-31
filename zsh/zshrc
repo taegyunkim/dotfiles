@@ -86,11 +86,10 @@ if ! command -v pyenv > /dev/null; then
   fi
 fi
 
-# Always keep pyenv shims first so `python`/`pip` resolve correctly in tmux.
+# Always move pyenv shims to the front so `python`/`pip` beat Homebrew in tmux.
 if command -v pyenv > /dev/null; then
-  if [[ ":$PATH:" != *":$PYENV_ROOT/shims:"* ]]; then
-    export PATH="$PYENV_ROOT/shims:$PATH"
-  fi
+  path=("$PYENV_ROOT/shims" ${path:#$PYENV_ROOT/shims})
+  export PATH
   if [[ -z "${PYENV_SHELL:-}" ]]; then
     _evalcache pyenv init - --no-push-path --no-rehash
   fi
