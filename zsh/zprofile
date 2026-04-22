@@ -10,6 +10,10 @@ if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
 fi
 
+if [[ -r "$HOME/.privilegesalias" ]]; then
+  source "$HOME/.privilegesalias"
+fi
+
 # Less
 # Set the default Less options.
 # Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
@@ -34,6 +38,10 @@ elif [ -x "/usr/local/bin/brew" ]; then
 elif [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
+
+# Prefer user-installed shims and scripts over system tools from /usr/bin.
+path=("$HOME/.local/bin" ${path:#$HOME/.local/bin})
+export PATH
 
 if [[ -d "/usr/local/go/bin" ]]; then
   export PATH="/usr/local/go/bin:$PATH"
