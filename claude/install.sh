@@ -15,11 +15,11 @@ mkdir -p "$CLAUDE_DIR"
 settings="$CLAUDE_DIR/settings.json"
 tmp_settings="$(mktemp)"
 trap 'rm -f "$tmp_settings"' EXIT
-if [[ -f "$settings" ]]; then
-  jq -s '.[0] * .[1]' "$settings" "$BASE_DIR/settings.json" > "$tmp_settings"
-else
-  cp "$BASE_DIR/settings.json" "$tmp_settings"
-fi
+settings_layers=()
+[[ -f "$settings" ]] && settings_layers+=("$settings")
+settings_layers+=("$BASE_DIR/settings.json")
+[[ -f "$WORK_DIR/settings.json" ]] && settings_layers+=("$WORK_DIR/settings.json")
+jq -s 'reduce .[] as $x ({}; . * $x)' "${settings_layers[@]}" > "$tmp_settings"
 mv "$tmp_settings" "$settings"
 echo "Merged settings.json"
 
