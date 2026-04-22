@@ -30,7 +30,10 @@
       "mcp__atlassian__*",
       "Read(//Users/taegyun.kim/.dotfiles-work/**)",
       "Read(//Users/taegyun.kim/.dotfiles-work/claude/**)",
-      "Bash(/Users/taegyun.kim/.dotfiles/claude/install.sh *)"
+      "Bash(/Users/taegyun.kim/.dotfiles/claude/install.sh *)",
+      "Bash(jq 'del\\(.hooks\\)' /Users/taegyun.kim/.claude/settings.json)",
+      "Bash(mv /tmp/settings.new /Users/taegyun.kim/.claude/settings.json)",
+      "Bash(/bin/mv -f /tmp/settings.new /Users/taegyun.kim/.claude/settings.json)"
     ],
     "deny": []
   }

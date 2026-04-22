@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 # Install Claude Code configuration.
-#  - Symlink hooks/ from base dotfiles.
 #  - Merge base settings.json into live ~/.claude/settings.json
 #    (dotfiles keys win; live-only keys like enabledPlugins are preserved).
 #  - Bootstrap base + optional work plugins/MCP servers via the Claude CLI.
@@ -13,21 +12,6 @@ CLAUDE_DIR="${CLAUDE_DIR:-$HOME/.claude}"
 
 mkdir -p "$CLAUDE_DIR"
 
-symlink_dir() {
-  local src="$1" dst="$2"
-  if [[ -L "$dst" ]]; then
-    ln -sfn "$src" "$dst"
-  elif [[ ! -e "$dst" ]]; then
-    ln -s "$src" "$dst"
-  else
-    echo "ERROR: $dst exists and is not a symlink. Remove it and re-run." >&2
-    exit 1
-  fi
-}
-
-symlink_dir "$BASE_DIR/hooks" "$CLAUDE_DIR/hooks"
-
-# Merge settings.json: live * dotfiles (dotfiles overrides on conflict).
 settings="$CLAUDE_DIR/settings.json"
 tmp_settings="$(mktemp)"
 trap 'rm -f "$tmp_settings"' EXIT
