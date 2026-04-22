@@ -27,7 +27,10 @@
       "Bash(bash ~/.dotfiles/claude/:*)",
       "WebSearch",
       "WebFetch",
-      "mcp__atlassian__*"
+      "mcp__atlassian__*",
+      "Read(//Users/taegyun.kim/.dotfiles-work/**)",
+      "Read(//Users/taegyun.kim/.dotfiles-work/claude/**)",
+      "Bash(/Users/taegyun.kim/.dotfiles/claude/install.sh *)"
     ],
     "deny": []
   }
