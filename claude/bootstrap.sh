@@ -17,7 +17,6 @@ mcp_add() {
   fi
 }
 
-mcp_add atlassian        --transport sse  https://mcp.atlassian.com/v1/sse
-mcp_add datadog-mcp      --transport http https://mcp.datadoghq.com/api/unstable/mcp-server/mcp
-mcp_add google-workspace --transport http https://google-workspace-mcp-server-834963730936.us-central1.run.app/mcp
-mcp_add slack            --transport http --callback-port 3118 --client-id 1601185624273.8899143856786 https://mcp.slack.com/mcp
+mcp_add atlassian   --transport sse  https://mcp.atlassian.com/v1/sse
+mcp_add datadog-mcp --transport http https://mcp.datadoghq.com/api/unstable/mcp-server/mcp
+mcp_add slack       --transport http --callback-port 3118 --client-id 1601185624273.8899143856786 https://mcp.slack.com/mcp
