@@ -11,7 +11,6 @@ ln -s ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -nfs ~/.dotfiles/zsh/p10k.zsh ~/.p10k.zsh
 ln -nfs ~/.dotfiles/zsh/zlogin ~/.zlogin
 ln -nfs ~/.dotfiles/zsh/zprofile ~/.zprofile
-ln -nfs ~/.dotfiles/zsh/zshenv ~/.zshenv
 ln -nfs ~/.dotfiles/zsh/zshrc ~/.zshrc
 mkdir -p ~/.config/nvim && ln -s ~/.dotfiles/nvim/init.vim ~/.config/nvim/init.vim
 mkdir -p ~/.local/share && ln -nfs ~/.dotfiles/vim ~/.local/share/nvim
