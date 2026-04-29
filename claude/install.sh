@@ -7,8 +7,19 @@
 set -euo pipefail
 
 BASE_DIR="${BASE_DIR:-$HOME/.dotfiles/claude}"
-WORK_DIR="${WORK_DIR:-$HOME/.dotfiles-work/claude}"
 CLAUDE_DIR="${CLAUDE_DIR:-$HOME/.claude}"
+
+# On DD machines, clone workspaces-dotfiles at the canonical path and use its
+# user folder as the work overlay. Caller can override WORK_DIR (e.g. inside
+# a workspace where the user folder is delivered to a different path).
+if [[ -d "$HOME/dd" && -z "${WORK_DIR:-}" ]]; then
+  WORKSPACES_DOTFILES="$HOME/dd/workspaces-dotfiles"
+  if [[ ! -d "$WORKSPACES_DOTFILES/.git" ]]; then
+    git clone git@github.com:DataDog/workspaces-dotfiles.git "$WORKSPACES_DOTFILES"
+  fi
+  WORK_DIR="$WORKSPACES_DOTFILES/users/taegyun.kim/claude"
+fi
+WORK_DIR="${WORK_DIR:-}"
 
 mkdir -p "$CLAUDE_DIR"
 
