@@ -1,4 +1,14 @@
 #!/usr/bin/env zsh
+# Abort on first error so a failure in claude/install.sh prevents the
+# .zprofile relink at the bottom from happening.
+set -euo pipefail
+
+# Run failure-prone work (network, jq, claude CLI) before any symlinks so
+# that a partial run leaves $HOME/.zprofile untouched — relevant when this
+# script runs during the workspaces-dotfiles first-login trigger, which
+# lives in $HOME/.zprofile and needs to survive failures so the next login
+# can retry.
+~/.dotfiles/claude/install.sh
 
 echo "Add symbolic links"
 ln -sfn ~/.dotfiles/dircolors-solarized/dircolors.256dark ~/.dir_colors
@@ -10,8 +20,10 @@ ln -sfn ~/.dotfiles/tmux ~/.tmux
 ln -sfn ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -sfn ~/.dotfiles/zsh/p10k.zsh ~/.p10k.zsh
 ln -sfn ~/.dotfiles/zsh/zlogin ~/.zlogin
-ln -sfn ~/.dotfiles/zsh/zprofile ~/.zprofile
 ln -sfn ~/.dotfiles/zsh/zshrc ~/.zshrc
 mkdir -p ~/.config/nvim && ln -sfn ~/.dotfiles/nvim/init.vim ~/.config/nvim/init.vim
 mkdir -p ~/.local/share && ln -sfn ~/.dotfiles/vim ~/.local/share/nvim
-~/.dotfiles/claude/install.sh
+
+# .zprofile last: see comment above. Replacing it is irreversible from this
+# script's perspective, so do it after everything else has succeeded.
+ln -sfn ~/.dotfiles/zsh/zprofile ~/.zprofile
