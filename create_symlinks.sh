@@ -21,8 +21,20 @@ ln -sfn ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -sfn ~/.dotfiles/zsh/p10k.zsh ~/.p10k.zsh
 ln -sfn ~/.dotfiles/zsh/zlogin ~/.zlogin
 ln -sfn ~/.dotfiles/zsh/zshrc ~/.zshrc
-mkdir -p ~/.config/nvim && ln -sfn ~/.dotfiles/nvim/init.vim ~/.config/nvim/init.vim
-mkdir -p ~/.local/share && ln -sfn ~/.dotfiles/vim ~/.local/share/nvim
+mkdir -p ~/.config
+# Replace any existing real directory at ~/.config/nvim with a symlink to
+# ~/.dotfiles/nvim. Symlinks are overwritten by ln -sfn, but a real directory
+# would otherwise cause ln to create the symlink *inside* it.
+if [ -d ~/.config/nvim ] && [ ! -L ~/.config/nvim ]; then
+  rm -rf ~/.config/nvim
+fi
+ln -sfn ~/.dotfiles/nvim ~/.config/nvim
+# Remove the legacy ~/.local/share/nvim -> ~/.dotfiles/vim symlink (used to
+# share vim-plug plugins with nvim). lazy.nvim manages its own data dir.
+if [ -L ~/.local/share/nvim ]; then
+  rm ~/.local/share/nvim
+fi
+mkdir -p ~/.local/share/nvim
 
 # .zprofile last: see comment above. Replacing it is irreversible from this
 # script's perspective, so do it after everything else has succeeded.
