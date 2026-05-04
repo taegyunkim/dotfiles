@@ -1,6 +1,5 @@
 {
   "apiKeyHelper": "workspace_secret ANTHROPIC_APIKEY1",
-  "model": "opus[1m]",
   "permissions": {
     "allow": [
       "Bash(cargo test:*)",
@@ -8,7 +7,6 @@
       "Bash(cargo doc:*)",
       "Bash(cargo build:*)",
       "Bash(cargo tree:*)",
-
       "Bash(git status*)",
       "Bash(git log*)",
       "Bash(git diff*)",
@@ -30,7 +28,6 @@
       "Bash(git worktree*)",
       "Bash(git tag*)",
       "Bash(git rev-parse*)",
-
       "Bash(gh search*)",
       "Bash(gh pr view*)",
       "Bash(gh pr diff*)",
@@ -40,7 +37,6 @@
       "Bash(gh issue list*)",
       "Bash(gh repo view*)",
       "Bash(gh run view*)",
-
       "Bash(./gradlew*)",
       "Bash(rg*)",
       "Bash(grep*)",
@@ -59,7 +55,6 @@
       "Bash(cut*)",
       "Glob",
       "Grep",
-
       "mcp__atlassian__getJiraIssue",
       "mcp__atlassian__getJiraIssueRemoteIssueLinks",
       "mcp__atlassian__getJiraProjectIssueTypesMetadata",
@@ -80,7 +75,6 @@
       "mcp__atlassian__fetchAtlassian",
       "mcp__atlassian__lookupJiraAccountId",
       "mcp__atlassian__atlassianUserInfo",
-
       "mcp__slack__slack_read_canvas",
       "mcp__slack__slack_read_channel",
       "mcp__slack__slack_read_thread",
@@ -90,5 +84,34 @@
       "mcp__slack__slack_search_public_and_private",
       "mcp__slack__slack_search_users"
     ]
-  }
+  },
+  "model": "opus[1m]",
+  "enabledPlugins": {
+    "clangd-lsp@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "dd@datadog-claude-plugins": true,
+    "dual-agents-review@datadog-claude-plugins": true,
+    "marketplace-auto-update@datadog-claude-plugins": true,
+    "osx-notifications@datadog-claude-plugins": true,
+    "perf-feedback@datadog-claude-plugins": true,
+    "appgate@datadog-claude-plugins": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "datadog-claude-plugins": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/DataDog/claude-marketplace.git"
+      }
+    }
+  },
+  "effortLevel": "high",
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "light"
 }
