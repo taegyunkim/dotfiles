@@ -28,13 +28,8 @@ fi
 export LESS='-F -g -i -M -R -S -w -X -z-4'
 
 # Set the Less input preprocessor.
-if (($ + commands[lesspipe.sh])); then
+if (( $+commands[lesspipe.sh] )); then
   export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
-fi
-
-# For NYU HPC
-if [[ -s "/usr/local/etc/modulefiles" ]]; then
-  export MODULEPATH=$MODULEPATH:/usr/local/etc/modulefiles
 fi
 
 # Set PATH, MANPATH, etc., for Homebrew.
@@ -72,10 +67,6 @@ fi
 if command -v pyenv > /dev/null; then
   # Keep pyenv shims ahead of package-manager Pythons in login shells and automation.
   path=("$PYENV_ROOT/shims" ${path:#$PYENV_ROOT/shims})
-fi
-
-if [[ -x "$HOME/.local/bin/mise" ]]; then
-  eval "$("$HOME/.local/bin/mise" activate zsh)"
 fi
 
 if [[ -d "$HOME/.local/share/coursier/bin" ]]; then
