@@ -2,8 +2,13 @@ if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
 fi
 
-export EDITOR='vim'
-export VISUAL='vim'
+if (( $+commands[nvim] )); then
+  export EDITOR='nvim'
+  export VISUAL='nvim'
+else
+  export EDITOR='vim'
+  export VISUAL='vim'
+fi
 export PAGER='less'
 
 if [[ -z "$LANG" ]]; then

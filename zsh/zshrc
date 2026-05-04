@@ -107,6 +107,7 @@ if [[ -s "$HOME/.dir_colors" ]]; then
   fi
 fi
 alias ls='ls --color=auto'
+(( $+commands[nvim] )) && alias vim='nvim'
 
 # zsh completion and history search
 source ~/.dotfiles/zsh/completion.zsh
