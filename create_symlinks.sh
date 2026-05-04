@@ -3,7 +3,13 @@
 # .zprofile relink at the bottom from happening.
 set -euo pipefail
 
-# Run failure-prone work (network, jq, claude CLI) before any symlinks so
+# Symlink Claude's settings.json before running the installer so the CLI
+# (claude plugin install / claude mcp add) writes through the symlink to
+# the dotfiles file rather than to a fresh local copy that we'd then clobber.
+mkdir -p ~/.claude
+ln -sfn ~/.dotfiles/claude/settings.json ~/.claude/settings.json
+
+# Run failure-prone work (network, claude CLI) before any other symlinks so
 # that a partial run leaves $HOME/.zprofile untouched — relevant when this
 # script runs during the workspaces-dotfiles first-login trigger, which
 # lives in $HOME/.zprofile and needs to survive failures so the next login

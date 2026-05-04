@@ -1,4 +1,5 @@
 {
+  "apiKeyHelper": "workspace_secret ANTHROPIC_APIKEY1",
   "model": "opus[1m]",
   "permissions": {
     "allow": [
