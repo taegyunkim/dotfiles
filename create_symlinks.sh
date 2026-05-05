@@ -30,13 +30,21 @@ find ~ -maxdepth 1 -type l -lname "*/.dotfiles/*" -delete 2>/dev/null || true
 find ~/.config -maxdepth 1 -type l -lname "*/.dotfiles/*" -delete 2>/dev/null || true
 find ~/.claude -maxdepth 1 -type l -lname "*/.dotfiles/*" -delete 2>/dev/null || true
 
-# Defensive cleanup: remove any real dirs / stale symlinks at paths stow
-# will own, so stow doesn't refuse or fold incorrectly.
-for p in ~/.config/nvim ~/.local/share/nvim; do
-  if [ -L "$p" ]; then rm "$p"
-  elif [ -d "$p" ] && [ ! -L "$p" ]; then rm -rf "$p"
-  fi
-done
+# ~/.config/nvim: only this script's dotfiles live here, so it's safe to
+# wipe a real dir (or stale symlink) so stow can recreate the symlink.
+if [ -L ~/.config/nvim ]; then
+  rm ~/.config/nvim
+elif [ -d ~/.config/nvim ] && [ ! -L ~/.config/nvim ]; then
+  rm -rf ~/.config/nvim
+fi
+
+# ~/.local/share/nvim: lazy.nvim and mason store plugin/server installs here.
+# Only remove the *legacy* symlink (which used to point to ~/.dotfiles/vim);
+# a real directory is precious user data and must NOT be wiped.
+if [ -L ~/.local/share/nvim ]; then
+  rm ~/.local/share/nvim
+fi
+
 mkdir -p ~/.config ~/.local/share/nvim ~/.claude
 
 # Stow claude first so ~/.claude/settings.json is in place before
