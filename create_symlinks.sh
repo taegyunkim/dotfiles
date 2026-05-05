@@ -3,11 +3,19 @@
 # .zprofile relink at the bottom from happening.
 set -euo pipefail
 
+# Symlink $HOME/.dotfiles/$1 to $HOME/$2, creating the destination's parent
+# directory if needed.
+link() {
+  local src="$HOME/.dotfiles/$1"
+  local dst="$HOME/$2"
+  mkdir -p "$(dirname "$dst")"
+  ln -sfn "$src" "$dst"
+}
+
 # Symlink Claude's settings.json before running the installer so the CLI
 # (claude plugin install / claude mcp add) writes through the symlink to
 # the dotfiles file rather than to a fresh local copy that we'd then clobber.
-mkdir -p ~/.claude
-ln -sfn ~/.dotfiles/claude/settings.json ~/.claude/settings.json
+link claude/settings.json .claude/settings.json
 
 # Run failure-prone work (network, claude CLI) before any other symlinks so
 # that a partial run leaves $HOME/.zprofile untouched — relevant when this
@@ -17,24 +25,25 @@ ln -sfn ~/.dotfiles/claude/settings.json ~/.claude/settings.json
 ~/.dotfiles/claude/install.sh
 
 echo "Add symbolic links"
-ln -sfn ~/.dotfiles/dircolors-solarized/dircolors.256dark ~/.dir_colors
-ln -sfn ~/.dotfiles/git/gitconfig ~/.gitconfig
-ln -sfn ~/.dotfiles/git/gitignore ~/.gitignore
-ln -sfn ~/.dotfiles/vim ~/.vim
-ln -sfn ~/.dotfiles/vim/vimrc ~/.vimrc
-ln -sfn ~/.dotfiles/tmux ~/.tmux
-ln -sfn ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
-ln -sfn ~/.dotfiles/zsh/p10k.zsh ~/.p10k.zsh
-ln -sfn ~/.dotfiles/zsh/zlogin ~/.zlogin
-ln -sfn ~/.dotfiles/zsh/zshrc ~/.zshrc
-mkdir -p ~/.config
+link dircolors-solarized/dircolors.256dark .dir_colors
+link git/gitconfig                         .gitconfig
+link git/gitignore                         .gitignore
+link vim                                   .vim
+link vim/vimrc                             .vimrc
+link tmux                                  .tmux
+link tmux/tmux.conf                        .tmux.conf
+link zsh/p10k.zsh                          .p10k.zsh
+link zsh/zlogin                            .zlogin
+link zsh/zshrc                             .zshrc
+
 # Replace any existing real directory at ~/.config/nvim with a symlink to
 # ~/.dotfiles/nvim. Symlinks are overwritten by ln -sfn, but a real directory
 # would otherwise cause ln to create the symlink *inside* it.
 if [ -d ~/.config/nvim ] && [ ! -L ~/.config/nvim ]; then
   rm -rf ~/.config/nvim
 fi
-ln -sfn ~/.dotfiles/nvim ~/.config/nvim
+link nvim .config/nvim
+
 # Remove the legacy ~/.local/share/nvim -> ~/.dotfiles/vim symlink (used to
 # share vim-plug plugins with nvim). lazy.nvim manages its own data dir.
 if [ -L ~/.local/share/nvim ]; then
@@ -44,4 +53,4 @@ mkdir -p ~/.local/share/nvim
 
 # .zprofile last: see comment above. Replacing it is irreversible from this
 # script's perspective, so do it after everything else has succeeded.
-ln -sfn ~/.dotfiles/zsh/zprofile ~/.zprofile
+link zsh/zprofile .zprofile
