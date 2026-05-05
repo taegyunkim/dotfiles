@@ -1,6 +1,15 @@
 #!/usr/bin/env zsh
 # Abort on first error so a failure in claude/install.sh prevents the
 # .zprofile relink at the bottom from happening.
+#
+# Contract with workspaces-dotfiles (DataDog/workspaces-dotfiles users/<u>):
+#   - Workspace's first_login.sh exports WORK_DIR=<user-dir>/claude before
+#     calling this script. We pass that env var through to claude/install.sh,
+#     which runs $WORK_DIR/bootstrap.sh if it exists.
+#   - Workspace then symlinks its own .gitconfig over ours after this script
+#     returns, so the personal git/gitconfig is bypassed on workspaces.
+#     (DD repos cloned under ~/dd/ on personal Macs use the includeIf in
+#     git/gitconfig instead.)
 set -euo pipefail
 
 # Symlink $HOME/.dotfiles/$1 to $HOME/$2, creating the destination's parent
