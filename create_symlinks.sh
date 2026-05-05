@@ -1,65 +1,53 @@
 #!/usr/bin/env zsh
-# Abort on first error so a failure in claude/install.sh prevents the
-# .zprofile relink at the bottom from happening.
+# Symlink dotfiles into $HOME via GNU stow. Idempotent: safe to re-run.
 #
 # Contract with workspaces-dotfiles (DataDog/workspaces-dotfiles users/<u>):
 #   - Workspace's first_login.sh exports WORK_DIR=<user-dir>/claude before
 #     calling this script. We pass that env var through to claude/install.sh,
 #     which runs $WORK_DIR/bootstrap.sh if it exists.
 #   - Workspace then symlinks its own .gitconfig over ours after this script
-#     returns, so the personal git/gitconfig is bypassed on workspaces.
+#     returns, so the personal git/.gitconfig is bypassed on workspaces.
 #     (DD repos cloned under ~/dd/ on personal Macs use the includeIf in
-#     git/gitconfig instead.)
+#     git/.gitconfig instead.)
 set -euo pipefail
 
-# Symlink $HOME/.dotfiles/$1 to $HOME/$2, creating the destination's parent
-# directory if needed.
-link() {
-  local src="$HOME/.dotfiles/$1"
-  local dst="$HOME/$2"
-  mkdir -p "$(dirname "$dst")"
-  ln -sfn "$src" "$dst"
-}
+# Ensure stow is available.
+if ! command -v stow >/dev/null 2>&1; then
+  if command -v brew >/dev/null 2>&1; then
+    brew install stow
+  else
+    echo "stow is required but not installed; install it (e.g. brew install stow) and re-run." >&2
+    exit 1
+  fi
+fi
 
-# Symlink Claude's settings.json before running the installer so the CLI
-# (claude plugin install / claude mcp add) writes through the symlink to
-# the dotfiles file rather than to a fresh local copy that we'd then clobber.
-link claude/settings.json .claude/settings.json
+cd ~/.dotfiles
 
-# Run failure-prone work (network, claude CLI) before any other symlinks so
-# that a partial run leaves $HOME/.zprofile untouched — relevant when this
-# script runs during the workspaces-dotfiles first-login trigger, which
-# lives in $HOME/.zprofile and needs to survive failures so the next login
-# can retry.
+# Migration cleanup: the previous create_symlinks.sh left bare symlinks under
+# $HOME pointing into ~/.dotfiles. Stow refuses to overwrite arbitrary
+# symlinks, so remove any that point into the dotfiles repo before stowing.
+find ~ -maxdepth 1 -type l -lname "*/.dotfiles/*" -delete 2>/dev/null || true
+find ~/.config -maxdepth 1 -type l -lname "*/.dotfiles/*" -delete 2>/dev/null || true
+find ~/.claude -maxdepth 1 -type l -lname "*/.dotfiles/*" -delete 2>/dev/null || true
+
+# Defensive cleanup: remove any real dirs / stale symlinks at paths stow
+# will own, so stow doesn't refuse or fold incorrectly.
+for p in ~/.config/nvim ~/.local/share/nvim; do
+  if [ -L "$p" ]; then rm "$p"
+  elif [ -d "$p" ] && [ ! -L "$p" ]; then rm -rf "$p"
+  fi
+done
+mkdir -p ~/.config ~/.local/share/nvim ~/.claude
+
+# Stow claude first so ~/.claude/settings.json is in place before
+# claude/install.sh writes through it via the Claude CLI.
+stow --target="$HOME" --restow claude
 ~/.dotfiles/claude/install.sh
 
-echo "Add symbolic links"
-link dircolors-solarized/dircolors.256dark .dir_colors
-link git/gitconfig                         .gitconfig
-link git/gitignore                         .gitignore
-link vim                                   .vim
-link vim/vimrc                             .vimrc
-link tmux                                  .tmux
-link tmux/tmux.conf                        .tmux.conf
-link zsh/p10k.zsh                          .p10k.zsh
-link zsh/zlogin                            .zlogin
-link zsh/zshrc                             .zshrc
+# Stow everything except zsh.
+stow --target="$HOME" --restow dircolors git vim tmux nvim
 
-# Replace any existing real directory at ~/.config/nvim with a symlink to
-# ~/.dotfiles/nvim. Symlinks are overwritten by ln -sfn, but a real directory
-# would otherwise cause ln to create the symlink *inside* it.
-if [ -d ~/.config/nvim ] && [ ! -L ~/.config/nvim ]; then
-  rm -rf ~/.config/nvim
-fi
-link nvim .config/nvim
-
-# Remove the legacy ~/.local/share/nvim -> ~/.dotfiles/vim symlink (used to
-# share vim-plug plugins with nvim). lazy.nvim manages its own data dir.
-if [ -L ~/.local/share/nvim ]; then
-  rm ~/.local/share/nvim
-fi
-mkdir -p ~/.local/share/nvim
-
-# .zprofile last: see comment above. Replacing it is irreversible from this
-# script's perspective, so do it after everything else has succeeded.
-link zsh/zprofile .zprofile
+# Stow zsh last so .zprofile flips last — preserves the workspaces-dotfiles
+# first-login trigger pattern (a failure earlier leaves $HOME/.zprofile
+# untouched and next login retries).
+stow --target="$HOME" --restow zsh
