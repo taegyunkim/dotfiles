@@ -34,6 +34,18 @@ return {
     },
   },
 
+  -- In-buffer markdown rendering: pretty headings, lists, code fences,
+  -- tables, checkboxes. Toggle with :RenderMarkdown {enable,disable,toggle}.
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    opts = {},
+  },
+
   {
     "folke/snacks.nvim",
     priority = 900,
