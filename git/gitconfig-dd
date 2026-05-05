@@ -1,0 +1,12 @@
+# Datadog overlay. Loaded by git/gitconfig via includeIf "gitdir:~/dd/" so
+# these settings only apply to repos cloned under ~/dd/. Personal repos
+# elsewhere keep using the base config.
+[user]
+	email = taegyun.kim@datadoghq.com
+	signingkey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILOW4Koum5/9KaLH8ghdR2zLtZMxKuZik/m49bVI0hkg
+[dd-gitsign]
+	username = taegyunkim
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = dd-gitsign

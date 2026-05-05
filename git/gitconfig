@@ -26,8 +26,8 @@
 [user]
 	name = Taegyun Kim
 	email = k.taegyun@gmail.com
-[difftool "diffpdf"]
-  cmd = diff-pdf --view \"$LOCAL\" \"$REMOTE\"
-[credential "https://git.overleaf.com"]
-  username = k.taegyun@gmail.com
-  helper = store
+
+# Datadog overlay: applies only to repos cloned under ~/dd/. Sets work
+# email and SSH-key signing via dd-gitsign. See git/gitconfig-dd.
+[includeIf "gitdir:~/dd/"]
+	path = ~/.dotfiles/git/gitconfig-dd
