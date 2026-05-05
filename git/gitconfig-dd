@@ -10,3 +10,7 @@
 	format = ssh
 [gpg "ssh"]
 	program = dd-gitsign
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true

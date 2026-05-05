@@ -27,7 +27,8 @@
 	name = Taegyun Kim
 	email = k.taegyun@gmail.com
 
-# Datadog overlay: applies only to repos cloned under ~/dd/. Sets work
-# email and SSH-key signing via dd-gitsign. See git/gitconfig-dd.
-[includeIf "gitdir:~/dd/"]
+# Datadog overlay. Applies to:
+#   - any repo (or worktree) whose `origin` URL is a DataDog GitHub repo.
+# Requires git >= 2.36. See git/gitconfig-dd.
+[includeIf "hasconfig:remote.*.url:git@github.com:DataDog/**"]
 	path = ~/.dotfiles/git/gitconfig-dd
