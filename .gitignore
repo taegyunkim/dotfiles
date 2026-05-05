@@ -1,1 +1,5 @@
-vim/backups/
+vim/.vim/backups/
+
+# tpm runtime-installs sibling plugins; only tpm itself is tracked (as a submodule).
+tmux/.tmux/plugins/*
+!tmux/.tmux/plugins/tpm

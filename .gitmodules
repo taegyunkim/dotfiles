@@ -2,7 +2,7 @@
 	path = dircolors-solarized
 	url = git@github.com:seebi/dircolors-solarized.git
 [submodule "tmux/plugins/tpm"]
-	path = tmux/plugins/tpm
+	path = tmux/.tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
 [submodule "zsh/antigen"]
 	path = zsh/antigen
