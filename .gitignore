@@ -3,3 +3,9 @@ vim/.vim/backups/
 # tpm runtime-installs sibling plugins; only tpm itself is tracked (as a submodule).
 tmux/.tmux/plugins/*
 !tmux/.tmux/plugins/tpm
+
+# The global gitignore (git/.gitignore) has `.claude/` so Claude Code state
+# doesn't get committed in random project repos. Override that here so the
+# dotfiles' own claude/.claude/ payload (the symlink target for ~/.claude/)
+# is tracked.
+!claude/.claude/

@@ -6,7 +6,7 @@ set -euo pipefail
 
 claude plugin marketplace add anthropics/claude-plugins-official
 
-for p in clangd-lsp claude-md-management rust-analyzer-lsp; do
+for p in clangd-lsp claude-md-management rust-analyzer-lsp skill-creator superpowers; do
   claude plugin install "$p@claude-plugins-official"
 done
 

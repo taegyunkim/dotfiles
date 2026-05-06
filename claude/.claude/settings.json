@@ -95,7 +95,9 @@
     "marketplace-auto-update@datadog-claude-plugins": true,
     "osx-notifications@datadog-claude-plugins": true,
     "perf-feedback@datadog-claude-plugins": true,
-    "appgate@datadog-claude-plugins": true
+    "appgate@datadog-claude-plugins": true,
+    "superpowers@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
