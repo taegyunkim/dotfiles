@@ -50,9 +50,6 @@ return {
       "Saghen/blink.cmp",
     },
     config = function()
-      local lspconfig = require("lspconfig")
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
-
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
           local bufnr = args.buf
@@ -77,33 +74,33 @@ return {
         update_in_insert = false,
       })
 
-      local servers = {
-        clangd = {},
-        basedpyright = {
-          settings = {
-            basedpyright = {
-              analysis = {
-                typeCheckingMode = "standard",
-                diagnosticMode = "openFilesOnly",
-              },
-            },
-          },
-        },
-        ruff = {},
-        gopls = {
-          settings = {
-            gopls = {
-              gofumpt = true,
-              staticcheck = true,
-            },
-          },
-        },
-      }
+      -- Configure servers via the new vim.lsp.config API (Neovim 0.11+).
+      -- nvim-lspconfig provides default configs in its lsp/<name>.lua files
+      -- which are auto-merged with our overrides. mason-lspconfig's
+      -- automatic_enable handles vim.lsp.enable() for installed servers.
+      vim.lsp.config("*", {
+        capabilities = require("blink.cmp").get_lsp_capabilities(),
+      })
 
-      for name, cfg in pairs(servers) do
-        cfg.capabilities = capabilities
-        lspconfig[name].setup(cfg)
-      end
+      vim.lsp.config("basedpyright", {
+        settings = {
+          basedpyright = {
+            analysis = {
+              typeCheckingMode = "standard",
+              diagnosticMode = "openFilesOnly",
+            },
+          },
+        },
+      })
+
+      vim.lsp.config("gopls", {
+        settings = {
+          gopls = {
+            gofumpt = true,
+            staticcheck = true,
+          },
+        },
+      })
     end,
   },
 
