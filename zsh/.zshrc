@@ -93,7 +93,7 @@ if [[ -d "$HOME/dd" ]]; then
   export CMAKE_BUILD_PARALLEL_LEVEL=$(nproc)
   export BP_INFRA_HOME="$HOME/dd/benchmarking-platform-tools/bp-infra"
   export PATH="$BP_INFRA_HOME:$PATH"
-  if command -v dd-gitsign > /dev/null; then
+  if [[ $OSTYPE == "darwin"* ]] && command -v dd-gitsign > /dev/null; then
     _evalcache dd-gitsign load-key
   fi
 fi
