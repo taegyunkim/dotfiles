@@ -28,6 +28,7 @@
       "Bash(git worktree*)",
       "Bash(git tag*)",
       "Bash(git rev-parse*)",
+      "Bash(jj:*)",
       "Bash(gh search*)",
       "Bash(gh pr view*)",
       "Bash(gh pr diff*)",
@@ -97,7 +98,8 @@
     "perf-feedback@datadog-claude-plugins": true,
     "appgate@datadog-claude-plugins": true,
     "superpowers@claude-plugins-official": true,
-    "skill-creator@claude-plugins-official": true
+    "skill-creator@claude-plugins-official": true,
+    "plannotator@plannotator": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -111,9 +113,15 @@
         "source": "git",
         "url": "https://github.com/DataDog/claude-marketplace.git"
       }
+    },
+    "plannotator": {
+      "source": {
+        "source": "github",
+        "repo": "backnotprop/plannotator"
+      }
     }
   },
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
   "skipDangerousModePermissionPrompt": true,
   "theme": "light"
 }
