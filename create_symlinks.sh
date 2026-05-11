@@ -69,4 +69,15 @@ stow --target="$HOME" --restow "${packages[@]}"
 # Stow zsh last so .zprofile flips last — preserves the workspaces-dotfiles
 # first-login trigger pattern (a failure earlier leaves $HOME/.zprofile
 # untouched and next login retries).
+#
+# On a fresh workspace, ~/.zprofile is a regular file containing only the
+# workspaces first-login trigger, and ~/.zshrc is the default oh-my-zsh
+# template — neither is something to preserve, but stow refuses to clobber
+# regular files. Back them up to .bak so stow can take over. On re-runs
+# these targets are stow-managed symlinks and the branches are skipped.
+for f in .zprofile .zshrc; do
+  if [ -f ~/"$f" ] && [ ! -L ~/"$f" ]; then
+    mv -f ~/"$f" ~/"$f".bak
+  fi
+done
 stow --target="$HOME" --restow zsh
