@@ -1,15 +1,25 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    -- Pin to the legacy stable branch. The default branch was renamed to
-    -- "main" which is a complete v1.0 rewrite with a different config API
-    -- (no more nvim-treesitter.configs.setup, no ensure_installed table).
-    -- Stay on master until the v1.0 API stabilizes; then migrate.
-    branch = "master",
+    branch = "main",
+    lazy = false,
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      ensure_installed = {
+    config = function()
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "TSUpdate",
+        callback = function()
+          require("nvim-treesitter.parsers").cython = {
+            install_info = {
+              url = "https://github.com/b0o/tree-sitter-cython",
+              branch = "master",
+            },
+          }
+        end,
+      })
+
+      require("nvim-treesitter").setup()
+
+      local parsers = {
         "bash",
         "c",
         "cpp",
@@ -30,23 +40,40 @@ return {
         "vim",
         "vimdoc",
         "yaml",
-      },
-      auto_install = true,
-      highlight = { enable = true },
-      indent = { enable = true },
-    },
-    config = function(_, opts)
-      -- Register the community cython parser (not in nvim-treesitter's
-      -- built-in registry) before setup() so ensure_installed can find it.
-      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-      parser_config.cython = {
-        install_info = {
-          url = "https://github.com/b0o/tree-sitter-cython",
-          files = { "src/parser.c", "src/scanner.c" },
-        },
-        filetype = "cython",
       }
-      require("nvim-treesitter.configs").setup(opts)
+      require("nvim-treesitter").install(parsers)
+
+      vim.treesitter.language.register("cython", { "cython" })
+
+      local highlight_fts = {
+        "bash",
+        "c",
+        "cpp",
+        "cython",
+        "go",
+        "gomod",
+        "gowork",
+        "json",
+        "lua",
+        "markdown",
+        "python",
+        "query",
+        "rust",
+        "toml",
+        "typescript",
+        "typescriptreact",
+        "vim",
+        "help",
+        "yaml",
+      }
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = highlight_fts,
+        callback = function()
+          if pcall(vim.treesitter.start) then
+            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
+        end,
+      })
     end,
   },
 }
