@@ -197,3 +197,4 @@ git-remove-deleted-branches() {
 }
 
 ulimit -c unlimited
+eval "$(/home/bits/.local/bin/mise activate zsh)"
