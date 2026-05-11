@@ -5,10 +5,13 @@
 #   - Workspace's first_login.sh exports WORK_DIR=<user-dir>/claude before
 #     calling this script. We pass that env var through to claude/install.sh,
 #     which runs $WORK_DIR/bootstrap.sh if it exists.
-#   - Workspace then symlinks its own .gitconfig over ours after this script
-#     returns, so the personal git/.gitconfig is bypassed on workspaces.
-#     (DD repos cloned under ~/dd/ on personal Macs use the includeIf in
-#     git/.gitconfig instead.)
+#   - When WORK_DIR is set we skip stowing the `git` package entirely: the
+#     workspace platform already manages ~/.gitconfig (a stub at workspace
+#     creation, then a symlink to $WORK_DIR/../.gitconfig set by
+#     first_login.sh after this script returns). Either form would conflict
+#     with stow, and the personal git/.gitconfig is bypassed on workspaces
+#     regardless. (DD repos cloned under ~/dd/ on personal Macs use the
+#     includeIf in git/.gitconfig instead.)
 set -euo pipefail
 
 # Ensure stow is available.
@@ -52,8 +55,16 @@ mkdir -p ~/.config ~/.local/share/nvim ~/.claude
 stow --target="$HOME" --restow claude
 ~/.dotfiles/claude/install.sh
 
-# Stow everything except zsh.
-stow --target="$HOME" --restow dircolors git vim tmux nvim
+# Stow everything except zsh. On workspaces, skip the git package: the
+# workspace platform provisions ~/.gitconfig (a regular file at first boot,
+# then a symlink to $WORK_DIR/../.gitconfig after first_login.sh runs), and
+# either form would conflict with stow. The personal git/.gitconfig is
+# bypassed on workspaces anyway (see header), so there's nothing to stow.
+packages=(dircolors vim tmux nvim)
+if [ -z "${WORK_DIR:-}" ]; then
+  packages+=(git)
+fi
+stow --target="$HOME" --restow "${packages[@]}"
 
 # Stow zsh last so .zprofile flips last — preserves the workspaces-dotfiles
 # first-login trigger pattern (a failure earlier leaves $HOME/.zprofile
