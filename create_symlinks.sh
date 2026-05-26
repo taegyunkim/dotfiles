@@ -81,3 +81,18 @@ for f in .zprofile .zshrc; do
   fi
 done
 stow --target="$HOME" --restow zsh
+
+# Invalidate the antigen cache if it still references powerlevel10k (replaced
+# by starship). Antigen does not auto-regenerate when bundle commands change,
+# so the cached init keeps loading p10k until removed. This is a one-time
+# cleanup: once antigen regenerates without p10k the grep matches nothing and
+# this block is a no-op.
+if [ -f ~/.antigen/init.zsh ] && grep -q powerlevel10k ~/.antigen/init.zsh; then
+  rm -f ~/.antigen/init.zsh ~/.antigen/init.zsh.zwc
+fi
+
+# Install starship if missing. Uses the official install script (user
+# preference); installs to ~/.local/bin which is already on PATH via .zprofile.
+if ! command -v starship >/dev/null 2>&1; then
+  curl -sS https://starship.rs/install.sh | sh -s -- -b "$HOME/.local/bin" -y || true
+fi

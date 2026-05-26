@@ -1,9 +1,3 @@
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # Antigen for zsh plugins/modules
 if [[ -f "$HOME/.dotfiles/zsh/antigen/antigen.zsh" ]]; then
   source "$HOME/.dotfiles/zsh/antigen/antigen.zsh"
@@ -26,13 +20,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle zsh-users/zsh-autosuggestions
 
-antigen theme romkatv/powerlevel10k
-
 antigen apply
-
-# powerlevel10k config, to customize prompt, run `p10k configure` or
-# edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # DataDog environment. Mirrors what the ansible playbook writes on a
 # DD-managed machine, plus a few personal preferences. Only runs when
@@ -171,6 +159,12 @@ if [[ -r ~/.opam/opam-init/init.zsh ]]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Starship prompt. Guarded so machines without starship still get a bare zsh
+# prompt; _evalcache caches the init output for faster shell startup.
+if command -v starship > /dev/null; then
+  _evalcache starship init zsh
+fi
 
 timezsh() {
   shell=${1-$SHELL}
