@@ -86,7 +86,6 @@
       "mcp__slack__slack_search_users"
     ]
   },
-  "model": "opus[1m]",
   "enabledPlugins": {
     "clangd-lsp@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
@@ -99,7 +98,8 @@
     "appgate@datadog-claude-plugins": true,
     "superpowers@claude-plugins-official": true,
     "skill-creator@claude-plugins-official": true,
-    "plannotator@plannotator": true
+    "plannotator@plannotator": true,
+    "deveng@datadog-claude-plugins": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
