@@ -84,3 +84,4 @@ if [[ -d "/usr/local/cuda/bin" ]]; then
 fi
 
 export PATH
+source /Users/taegyun.kim/.privilegesalias
