@@ -32,17 +32,20 @@ fi
 cd ~/.dotfiles
 
 WORKSPACE_USER_DIR="${WORKSPACE_USER_DIR:-}"
+WORKSPACE_OWNS_GITCONFIG=0
 if [ -z "$WORKSPACE_USER_DIR" ] && [ -n "${WORK_DIR:-}" ]; then
   WORKSPACE_USER_DIR="${WORK_DIR%/claude}"
   if [ "$WORKSPACE_USER_DIR" = "$WORK_DIR" ]; then
     WORKSPACE_USER_DIR="$(dirname "$WORK_DIR")"
   fi
+  WORKSPACE_OWNS_GITCONFIG=1
 fi
-if [ -z "$WORKSPACE_USER_DIR" ] && [ -L "$HOME/.gitconfig" ]; then
+if [ -L "$HOME/.gitconfig" ]; then
   gitconfig_target="$(readlink "$HOME/.gitconfig")"
   case "$gitconfig_target" in
     */workspaces-dotfiles/users/*/.gitconfig)
       WORKSPACE_USER_DIR="${gitconfig_target%/.gitconfig}"
+      WORKSPACE_OWNS_GITCONFIG=1
       ;;
   esac
 fi
@@ -96,7 +99,7 @@ stow --target="$HOME" --restow pi
 # Stow everything except zsh. On workspaces, skip the git package because the
 # workspace platform provisions ~/.gitconfig from workspaces-dotfiles.
 packages=(dircolors vim tmux nvim)
-if [ -z "$WORKSPACE_USER_DIR" ]; then
+if [ "$WORKSPACE_OWNS_GITCONFIG" -eq 0 ]; then
   packages+=(git)
 fi
 stow --target="$HOME" --restow "${packages[@]}"
