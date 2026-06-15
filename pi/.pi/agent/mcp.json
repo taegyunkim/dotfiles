@@ -1,0 +1,16 @@
+{
+  "settings": {
+    "autoAuth": true
+  },
+  "imports": [
+    "claude-code"
+  ],
+  "mcpServers": {
+    "ddci-mcp-prod": {
+      "url": "https://ddci-mcp.mcp.us1.ddbuild.io/internal/mcp"
+    },
+    "profiling-mcp-prod": {
+      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,profiling"
+    }
+  }
+}

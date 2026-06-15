@@ -32,6 +32,7 @@ cd ~/.dotfiles
 find ~ -maxdepth 1 -type l -lname "*/.dotfiles/*" -delete 2>/dev/null || true
 find ~/.config -maxdepth 1 -type l -lname "*/.dotfiles/*" -delete 2>/dev/null || true
 find ~/.claude -maxdepth 1 -type l -lname "*/.dotfiles/*" -delete 2>/dev/null || true
+find ~/.pi/agent -maxdepth 1 -type l -lname "*/.dotfiles/*" -delete 2>/dev/null || true
 
 # ~/.config/nvim: only this script's dotfiles live here, so it's safe to
 # wipe a real dir (or stale symlink) so stow can recreate the symlink.
@@ -48,12 +49,22 @@ if [ -L ~/.local/share/nvim ]; then
   rm ~/.local/share/nvim
 fi
 
-mkdir -p ~/.config ~/.local/share/nvim ~/.claude
+mkdir -p ~/.config ~/.local/share/nvim ~/.claude ~/.pi/agent
 
 # Stow claude first so ~/.claude/settings.json is in place before
 # claude/install.sh writes through it via the Claude CLI.
 stow --target="$HOME" --restow claude
 ~/.dotfiles/claude/install.sh
+
+# Preserve existing Pi agent runtime state, but let stow manage stable config
+# files from ~/.dotfiles/pi. Auth, OAuth, caches, sessions, generated models,
+# npm installs, and trust state stay as local files under ~/.pi/agent.
+for f in SYSTEM.md mcp.json settings.json; do
+  if [ -f ~/.pi/agent/"$f" ] && [ ! -L ~/.pi/agent/"$f" ]; then
+    mv -f ~/.pi/agent/"$f" ~/.pi/agent/"$f".bak
+  fi
+done
+stow --target="$HOME" --restow pi
 
 # Stow everything except zsh. On workspaces, skip the git package: the
 # workspace platform provisions ~/.gitconfig (a regular file at first boot,

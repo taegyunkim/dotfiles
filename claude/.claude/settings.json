@@ -87,7 +87,6 @@
     ],
     "defaultMode": "bypassPermissions"
   },
-  "model": "opus[1m]",
   "enabledPlugins": {
     "clangd-lsp@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
@@ -100,7 +99,7 @@
     "appgate@datadog-claude-plugins": true,
     "superpowers@claude-plugins-official": true,
     "skill-creator@claude-plugins-official": true,
-    "plannotator@plannotator": true
+    "deveng@datadog-claude-plugins": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -113,12 +112,6 @@
       "source": {
         "source": "git",
         "url": "https://github.com/DataDog/claude-marketplace.git"
-      }
-    },
-    "plannotator": {
-      "source": {
-        "source": "github",
-        "repo": "backnotprop/plannotator"
       }
     }
   },
