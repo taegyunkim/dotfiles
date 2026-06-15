@@ -2,10 +2,10 @@
   "settings": {
     "autoAuth": true
   },
-  "imports": [
-    "claude-code"
-  ],
   "mcpServers": {
+    "datadog-google-workspace": {
+      "url": "https://google-workspace-mcp-server-834963730936.us-central1.run.app/mcp"
+    },
     "ddci-mcp-prod": {
       "url": "https://ddci-mcp.mcp.us1.ddbuild.io/internal/mcp"
     },
