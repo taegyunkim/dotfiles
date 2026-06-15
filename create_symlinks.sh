@@ -14,6 +14,11 @@
 #     includeIf in git/.gitconfig instead.)
 set -euo pipefail
 
+# Non-login SSH commands on Linux workspaces may not have linuxbrew on PATH.
+if ! command -v brew >/dev/null 2>&1 && [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
 # Ensure stow is available.
 if ! command -v stow >/dev/null 2>&1; then
   if command -v brew >/dev/null 2>&1; then
