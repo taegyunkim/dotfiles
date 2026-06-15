@@ -5,11 +5,11 @@
 #   - Workspace's first_login.sh exports WORK_DIR=<user-dir>/claude before
 #     calling this script. We pass that env var through to claude/install.sh,
 #     which runs $WORK_DIR/bootstrap.sh if it exists.
-#   - When WORK_DIR is set we skip stowing the `git` package entirely: the
-#     workspace platform already manages ~/.gitconfig (a stub at workspace
-#     creation, then a symlink to $WORK_DIR/../.gitconfig set by
-#     first_login.sh after this script returns). Either form would conflict
-#     with stow, and the personal git/.gitconfig is bypassed on workspaces
+#   - Manual re-runs also detect the workspace overlay from ~/.gitconfig when
+#     it points into workspaces-dotfiles/users/<u>/.gitconfig.
+#   - On workspaces we skip stowing the `git` package entirely: the workspace
+#     platform manages ~/.gitconfig, and either a regular file or symlink would
+#     conflict with stow. The personal git/.gitconfig is bypassed on workspaces
 #     regardless. (DD repos cloned under ~/dd/ on personal Macs use the
 #     includeIf in git/.gitconfig instead.)
 set -euo pipefail
@@ -25,6 +25,28 @@ if ! command -v stow >/dev/null 2>&1; then
 fi
 
 cd ~/.dotfiles
+
+WORKSPACE_USER_DIR="${WORKSPACE_USER_DIR:-}"
+if [ -z "$WORKSPACE_USER_DIR" ] && [ -n "${WORK_DIR:-}" ]; then
+  WORKSPACE_USER_DIR="${WORK_DIR%/claude}"
+  if [ "$WORKSPACE_USER_DIR" = "$WORK_DIR" ]; then
+    WORKSPACE_USER_DIR="$(dirname "$WORK_DIR")"
+  fi
+fi
+if [ -z "$WORKSPACE_USER_DIR" ] && [ -L "$HOME/.gitconfig" ]; then
+  gitconfig_target="$(readlink "$HOME/.gitconfig")"
+  case "$gitconfig_target" in
+    */workspaces-dotfiles/users/*/.gitconfig)
+      WORKSPACE_USER_DIR="${gitconfig_target%/.gitconfig}"
+      ;;
+  esac
+fi
+if [ -z "$WORKSPACE_USER_DIR" ] && [ -d "$HOME/dd/workspaces-dotfiles/users/$USER" ]; then
+  WORKSPACE_USER_DIR="$HOME/dd/workspaces-dotfiles/users/$USER"
+fi
+if [ -z "${WORK_DIR:-}" ] && [ -n "$WORKSPACE_USER_DIR" ] && [ -d "$WORKSPACE_USER_DIR/claude" ]; then
+  export WORK_DIR="$WORKSPACE_USER_DIR/claude"
+fi
 
 # Migration cleanup: the previous create_symlinks.sh left bare symlinks under
 # $HOME pointing into ~/.dotfiles. Stow refuses to overwrite arbitrary
@@ -66,18 +88,15 @@ for f in SYSTEM.md mcp.json settings.json; do
 done
 stow --target="$HOME" --restow pi
 
-# Stow everything except zsh. On workspaces, skip the git package: the
-# workspace platform provisions ~/.gitconfig (a regular file at first boot,
-# then a symlink to $WORK_DIR/../.gitconfig after first_login.sh runs), and
-# either form would conflict with stow. The personal git/.gitconfig is
-# bypassed on workspaces anyway (see header), so there's nothing to stow.
+# Stow everything except zsh. On workspaces, skip the git package because the
+# workspace platform provisions ~/.gitconfig from workspaces-dotfiles.
 packages=(dircolors vim tmux nvim)
-if [ -z "${WORK_DIR:-}" ]; then
+if [ -z "$WORKSPACE_USER_DIR" ]; then
   packages+=(git)
 fi
 stow --target="$HOME" --restow "${packages[@]}"
 
-# Stow zsh last so .zprofile flips last — preserves the workspaces-dotfiles
+# Stow zsh last so .zprofile flips last, preserving the workspaces-dotfiles
 # first-login trigger pattern (a failure earlier leaves $HOME/.zprofile
 # untouched and next login retries).
 #
