@@ -40,6 +40,9 @@ Useful team links:
 * All my terminal interactions go through tmux. On a remote machine over SSH, the inner tmux uses prefix `C-a` instead of `C-b`.
 * Datadog-related repos live under `~/dd/`. Personal repos live under `~/personal` (or `~/.dotfiles` for dotfiles).
 * Languages I work in regularly: C, C++, Python, Cython, Rust, Go.
+* When using `gh`, make sure to check which account we're currently logged into.
+  For repositories in github.com/ddoghq-sandbox and github.com/ddoghq, need to use
+  taegyun-kim_ddog. Use my personal taegyunkim for the rest.
 
 ## Typical repos
 
