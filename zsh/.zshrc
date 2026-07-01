@@ -36,6 +36,10 @@ if [[ -d "$HOME/dd" ]]; then
     export HOMEBREW_BIN=/opt/homebrew/bin
   fi
 
+  if [[ $OSTYPE == "linux"* ]]; then
+    _evalcache /home/linuxbrew/.linuxbrew/bin/brew shellenv
+  fi
+
   # Ruby shims (rbenv installed by ansible on DD machines)
   if command -v rbenv > /dev/null; then
     _evalcache rbenv init - --no-rehash
