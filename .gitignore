@@ -16,3 +16,5 @@ pi/.pi/agent/*
 !pi/.pi/agent/SYSTEM.md
 !pi/.pi/agent/mcp.json
 !pi/.pi/agent/settings.json
+!pi/.pi/agent/scripts/
+!pi/.pi/agent/scripts/slack-mcp-auth-pi.py
