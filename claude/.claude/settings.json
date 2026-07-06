@@ -92,14 +92,10 @@
     "claude-md-management@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
     "dd@datadog-claude-plugins": true,
-    "dual-agents-review@datadog-claude-plugins": true,
     "marketplace-auto-update@datadog-claude-plugins": true,
     "osx-notifications@datadog-claude-plugins": true,
-    "perf-feedback@datadog-claude-plugins": true,
     "appgate@datadog-claude-plugins": true,
-    "superpowers@claude-plugins-official": true,
     "skill-creator@claude-plugins-official": true,
-    "deveng@datadog-claude-plugins": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
