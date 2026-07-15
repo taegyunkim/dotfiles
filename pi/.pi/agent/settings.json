@@ -7,7 +7,7 @@
   "packages": [
     "~/dd/datadog-pi-packages/packages/refresh-models",
     "~/dd/datadog-pi-packages/packages/notifications",
-    "~/dd/daily-journal",
+    "~/dd/datadog-pi-packages/packages/mcp-port-forward",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-powerline-footer",
     "npm:pi-mcp-adapter"

@@ -1,3 +1,93 @@
+# Interactive zsh setup. Keep login-shell startup in ~/.zprofile minimal, so
+# interactive shells behave the same whether or not they are login shells.
+typeset -U path PATH
+
+_path_prepend() {
+  local dir="$1"
+  path=("$dir" "${(@)path:#$dir}")
+}
+
+_path_prepend_if_dir() {
+  [[ -d "$1" ]] && _path_prepend "$1"
+}
+
+if [[ "$OSTYPE" == darwin* ]]; then
+  export BROWSER='open'
+fi
+
+if [[ -z "$LANG" ]]; then
+  export LANG='en_US.UTF-8'
+fi
+
+export PYENV_ROOT="${PYENV_ROOT:-$HOME/.pyenv}"
+
+# Set PATH, MANPATH, etc., for Homebrew.
+if [[ -x "/opt/homebrew/bin/brew" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x "/usr/local/bin/brew" ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+elif [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+[[ -s "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+
+if [[ -d "$HOME/.volta" ]]; then
+  export VOLTA_HOME="$HOME/.volta"
+  _path_prepend "$VOLTA_HOME/bin"
+fi
+
+# Prefer user-installed shims and scripts over system tools from /usr/bin.
+_path_prepend "$HOME/.local/bin"
+_path_prepend_if_dir "/usr/local/go/bin"
+
+if (( $+commands[go] )); then
+  _path_prepend "$(go env GOPATH)/bin"
+fi
+
+_path_prepend_if_dir "$PYENV_ROOT/bin"
+
+if command -v pyenv > /dev/null; then
+  # Keep pyenv shims ahead of package-manager Pythons.
+  _path_prepend "$PYENV_ROOT/shims"
+fi
+
+if [[ -d "$HOME/.local/share/coursier/bin" ]]; then
+  export COURSIER_BIN_DIR="$HOME/.local/share/coursier/bin"
+  _path_prepend "$COURSIER_BIN_DIR"
+fi
+
+_path_prepend_if_dir "$HOME/.nimble/bin"
+
+if [[ -d "/usr/local/cuda/bin" ]]; then
+  _path_prepend "/usr/local/cuda/bin"
+  export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+fi
+
+export PATH
+
+if (( $+commands[nvim] )); then
+  export EDITOR='nvim'
+  export VISUAL='nvim'
+else
+  export EDITOR='vim'
+  export VISUAL='vim'
+fi
+export PAGER='less'
+
+# Less
+# Set the default Less options.
+# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
+# Remove -X and -F (exit if the content fits on one screen) to enable it.
+export LESS='-F -g -i -M -R -S -w -X -z-4'
+
+# Set the Less input preprocessor.
+if (( $+commands[lesspipe.sh] )); then
+  export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
+fi
+
+[[ -r "$HOME/.privilegesalias" ]] && source "$HOME/.privilegesalias"
+
 # Antigen for zsh plugins/modules
 if [[ -f "$HOME/.dotfiles/zsh/antigen/antigen.zsh" ]]; then
   source "$HOME/.dotfiles/zsh/antigen/antigen.zsh"
@@ -27,8 +117,6 @@ antigen apply
 # $HOME/dd exists, so non-DD machines are unaffected.
 if [[ -d "$HOME/dd" ]]; then
   if [[ $OSTYPE == "darwin"* ]]; then
-    _evalcache /opt/homebrew/bin/brew shellenv
-
     # Force certain more-secure behaviours from homebrew
     export HOMEBREW_NO_INSECURE_REDIRECT=1
     export HOMEBREW_CASK_OPTS=--require-sha
@@ -53,9 +141,9 @@ if [[ -d "$HOME/dd" ]]; then
   fi
 
   # DD devtools and Go workspace
-  export PATH="$HOME/dd/devtools/bin:$PATH"
+  _path_prepend "$HOME/dd/devtools/bin"
   export GOPATH="$HOME/go"
-  export PATH="$GOPATH/bin:$PATH"
+  _path_prepend "$GOPATH/bin"
   export DATADOG_ROOT="$HOME/dd"
   # Tell the devenv vm to mount $GOPATH/src rather than just dd-go
   export MOUNT_ALL_GO_SRC=1
@@ -80,7 +168,7 @@ if [[ -d "$HOME/dd" ]]; then
   export DD_USE_SCCACHE=1
   export CMAKE_BUILD_PARALLEL_LEVEL=$(nproc)
   export BP_INFRA_HOME="$HOME/dd/benchmarking-platform-tools/bp-infra"
-  export PATH="$BP_INFRA_HOME:$PATH"
+  _path_prepend "$BP_INFRA_HOME"
   if [[ $OSTYPE == "darwin"* ]] && command -v dd-gitsign > /dev/null; then
     _evalcache dd-gitsign load-key
   fi

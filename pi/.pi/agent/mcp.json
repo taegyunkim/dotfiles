@@ -11,6 +11,14 @@
     },
     "profiling-mcp-prod": {
       "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,profiling"
+    },
+    "slack": {
+      "type": "http",
+      "url": "https://mcp.slack.com/mcp",
+      "oauth": {
+        "clientId": "1601185624273.8899143856786",
+        "redirectUri": "http://localhost:3118/callback"
+      }
     }
   }
 }
