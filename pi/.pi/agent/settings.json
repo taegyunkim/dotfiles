@@ -1,13 +1,15 @@
 {
-  "lastChangelogVersion": "0.80.7",
+  "lastChangelogVersion": "0.80.10",
   "defaultProvider": "ai-gw-openai",
   "defaultModel": "openai/gpt-5.6-sol",
   "defaultThinkingLevel": "high",
   "theme": "light",
   "packages": [
+    "~/dd/datadog-pi-packages/packages/confluence-adf",
     "~/dd/datadog-pi-packages/packages/refresh-models",
     "~/dd/datadog-pi-packages/packages/notifications",
     "~/dd/datadog-pi-packages/packages/mcp-port-forward",
+    "npm:@juicesharp/rpiv-todo",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-powerline-footer",
     "npm:pi-mcp-adapter"
