@@ -10,14 +10,6 @@ Some personal details about me:
 
 * Name: Taegyun Kim
 * Email: <taegyun.kim@datadoghq.com>
-* Github: <https://github.com/taegyunkim>
-* Slack: @taegyun.kim (<https://dd.enterprise.slack.com/team/U071N8GMG68>)
-
-Useful team links:
-
-* Confluence: <https://datadoghq.atlassian.net/wiki/spaces/PROF>
-* JIRA: <https://datadoghq.atlassian.net/browse/PROF>
-* Python JIRA: https://datadoghq.atlassian.net/jira/software/c/projects/PROF/boards/27442
 
 ## My setup
 
@@ -27,11 +19,11 @@ Useful team links:
   * `grep` → `rg`
   * `find` → `fd`
 * All my terminal interactions go through tmux. On a remote machine over SSH, the inner tmux uses prefix `C-a` instead of `C-b`.
-* Datadog-related repos live under `~/dd/`. Personal repos live under `~/personal` (or `~/.dotfiles` for dotfiles).
+* Remote repository checkouts live under `~/dd/`.
 * Languages I work in regularly: C, C++, Python, Cython, Rust, Go.
 * When using `gh`, make sure to check which account we're currently logged into.
   For repositories in github.com/ddoghq-sandbox and github.com/ddoghq, need to use
-  taegyun-kim_ddog. Use my personal taegyunkim for the rest.
+  taegyun-kim_ddog. Use my taegyunkim for the rest.
 * Use `acli` to access Atlassian (confluence/jira) links
 
 ## Typical repos
@@ -69,3 +61,4 @@ External projects I study for profiler design:
 * Always open PRs in draft mode by default.
 * When preparing a PR, follow the PR templates for the repo if available.
 * When iterating or reacting to changes, update the PR title and description.
+* When writing comments, never put AIDEV-NOTE:, just comments are fine.
