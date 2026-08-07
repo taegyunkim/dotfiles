@@ -89,7 +89,7 @@ stow --target="$HOME" --restow claude
 # Preserve existing Pi agent runtime state, but let stow manage stable config
 # files from ~/.dotfiles/pi. Auth, OAuth, caches, sessions, generated models,
 # npm installs, and trust state stay as local files under ~/.pi/agent.
-for f in SYSTEM.md mcp.json settings.json extensions/continue-after-threshold-compaction.ts; do
+for f in SYSTEM.md mcp.json settings.json extensions/continue-after-threshold-compaction.ts scripts/slack-mcp-auth-pi.py; do
   if [ -f ~/.pi/agent/"$f" ] && [ ! -L ~/.pi/agent/"$f" ]; then
     mv -f ~/.pi/agent/"$f" ~/.pi/agent/"$f".bak
   fi
