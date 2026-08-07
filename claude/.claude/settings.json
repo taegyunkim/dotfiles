@@ -87,7 +87,7 @@
     ],
     "defaultMode": "bypassPermissions"
   },
-  "model": "sonnet[1m]",
+  "model": "opus[1m]",
   "enabledPlugins": {
     "clangd-lsp@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
