@@ -280,3 +280,5 @@ git-remove-deleted-branches() {
 
 ulimit -c unlimited
 command -v mise > /dev/null && eval "$(mise activate zsh)"
+
+export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
