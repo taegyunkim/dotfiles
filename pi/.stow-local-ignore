@@ -1,3 +1,6 @@
+# Keep repository-only tests out of $HOME when this package is stowed.
+^/tests(/.*)?$
+
 # Keep Pi runtime and machine-local state out of the stow payload even if
 # those files are accidentally copied into this package.
 ^/\.pi/agent/auth\.json$

@@ -19,5 +19,6 @@ pi/.pi/agent/*
 !pi/.pi/agent/extensions/
 pi/.pi/agent/extensions/*
 !pi/.pi/agent/extensions/continue-after-threshold-compaction.ts
+!pi/.pi/agent/extensions/github-pr-footer.ts
 !pi/.pi/agent/scripts/
 !pi/.pi/agent/scripts/slack-mcp-auth-pi.py
