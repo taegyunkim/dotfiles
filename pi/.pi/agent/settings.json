@@ -42,6 +42,7 @@
     "~/dd/datadog-pi-packages/packages/refresh-models",
     "~/dd/datadog-pi-packages/packages/notifications",
     "~/dd/datadog-pi-packages/packages/mcp-port-forward",
+    "~/dd/datadog-pi-packages/packages/dd-pi-packages-sync",
     "npm:@juicesharp/rpiv-todo",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-powerline-footer",
