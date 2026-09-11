@@ -282,3 +282,5 @@ ulimit -c unlimited
 command -v mise > /dev/null && eval "$(mise activate zsh)"
 
 export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
+
+path=(/opt/dogbrew/shims/bin /opt/dogbrew/bin ${${path:#/opt/dogbrew/shims/bin}:#/opt/dogbrew/bin}); fpath=(/opt/dogbrew/share/zsh/site-functions ${fpath:#/opt/dogbrew/share/zsh/site-functions}); case ":${MANPATH-}:" in *:'/opt/dogbrew/share/man':*) ;; *) export MANPATH='/opt/dogbrew/share/man':${MANPATH-} ;; esac # dogbrew shell setup
