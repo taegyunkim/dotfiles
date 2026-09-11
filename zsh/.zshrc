@@ -281,4 +281,8 @@ git-remove-deleted-branches() {
 ulimit -c unlimited
 command -v mise > /dev/null && eval "$(mise activate zsh)"
 
-export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
+# Workspaces maintain a stable symlink for the forwarded SSH agent.
+# On macOS, preserve the launchd-provided SSH_AUTH_SOCK.
+if [[ "$(uname -s)" != "Darwin" && -S "$HOME/.ssh/ssh_auth_sock" ]]; then
+  export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
+fi
