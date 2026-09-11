@@ -37,7 +37,7 @@
     ]
   },
   "packages": [
-    "~/dd/datadog-pi-packages/packages/confluence-adf",
+    "~/dd/datadog-pi-packages/packages/confluence-cli",
     "~/dd/datadog-pi-packages/packages/refresh-models",
     "~/dd/datadog-pi-packages/packages/notifications",
     "~/dd/datadog-pi-packages/packages/mcp-port-forward",
