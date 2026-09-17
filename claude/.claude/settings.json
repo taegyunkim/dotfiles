@@ -105,6 +105,12 @@
         "source": "github",
         "repo": "anthropics/claude-plugins-official"
       }
+    },
+    "trajectory": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/taegyun.kim/.trajectory/claude-marketplace"
+      }
     }
   },
   "effortLevel": "xhigh",
