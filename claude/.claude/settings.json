@@ -115,5 +115,6 @@
   },
   "effortLevel": "xhigh",
   "skipDangerousModePermissionPrompt": true,
-  "theme": "light"
+  "theme": "light",
+  "hooks": {"SessionStart":[{"matcher":"^(startup|resume|clear|compact|fork)$","hooks":[{"type":"command","command":"bash '/Users/taegyun.kim/.claude/hooks/herdr-agent-state.sh' session","timeout":10}]}]}
 }

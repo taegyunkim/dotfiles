@@ -54,11 +54,10 @@ External projects I study for profiler design:
 
 ## My asks for you
 
-* Try not to ask for my input too often. Instead of lots of isolated questions, come up with a full proposal and ask me to review it.
 * Never use em dashes (—). Use a comma, period, or rewrite the sentence instead.
 * When you need to know something about a repo I cross-reference (the cross-language tracers, ddprof, dd-otel-host-profiler, py-spy, austin, etc.), check `~/dd/` first to see if it's already cloned locally and read the source there instead of doing a web search. Only fall back to a web search or fetching from a remote if the repo isn't checked out.
 * When citing or quoting source code from any external repo, always include the version it applies to. Prefer specific human-readable versions (e.g. "py-spy v0.4.2", "CPython 3.13.1") over ranges or commit hashes, because behavior can change between minor or patch releases and "v0.4+" hides that. If the repo only has commit-level history at the point you're reading, name the nearest tag and the commit (e.g. "v2.4.0 + 12 commits, sha abc1234").
 * Always open PRs in draft mode by default.
 * When preparing a PR, follow the PR templates for the repo if available.
 * When iterating or reacting to changes, update the PR title and description.
-* When writing comments, never put AIDEV-NOTE:, just comments are fine.
+* When writing comments, never put AIDEV-*:, just comments are fine.

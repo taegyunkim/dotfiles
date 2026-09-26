@@ -6,6 +6,10 @@
     "datadog-google-workspace": {
       "url": "https://google-workspace-mcp-server-834963730936.us-central1.run.app/mcp"
     },
+    "datadog-zendesk": {
+      "url": "https://13287.apim.mcp.workato.com/",
+      "auth": "oauth"
+    },
     "analytics-data-hub": {
       "url": "https://analytics-data-hub-mcp.mcp.us1.prod.dog/internal/mcp",
       "auth": "oauth"

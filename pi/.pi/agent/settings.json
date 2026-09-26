@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.85.1",
+  "lastChangelogVersion": "0.87.1",
   "defaultProvider": "ai-gw-openai",
   "defaultModel": "openai/gpt-6-astra",
   "defaultThinkingLevel": "high",
@@ -43,10 +43,11 @@
     "~/dd/datadog-pi-packages/packages/notifications",
     "~/dd/datadog-pi-packages/packages/mcp-port-forward",
     "~/dd/datadog-pi-packages/packages/dd-pi-packages-sync",
+    "~/dd/datadog-pi-packages/packages/brag-sheet",
     "npm:@juicesharp/rpiv-todo",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-powerline-footer",
-    "npm:pi-mcp-adapter@2.11.0",
+    "npm:pi-mcp-adapter",
     "npm:pi-subagents"
   ]
 }
