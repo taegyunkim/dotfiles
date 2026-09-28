@@ -44,6 +44,7 @@
     "~/dd/datadog-pi-packages/packages/mcp-port-forward",
     "~/dd/datadog-pi-packages/packages/dd-pi-packages-sync",
     "~/dd/datadog-pi-packages/packages/brag-sheet",
+    "~/dd/datadog-pi-packages/packages/chonk-upload",
     "npm:@juicesharp/rpiv-todo",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-powerline-footer",
