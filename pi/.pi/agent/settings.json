@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.87.1",
+  "lastChangelogVersion": "1.0.2",
   "defaultProvider": "ai-gw-openai",
   "defaultModel": "openai/gpt-6-astra",
   "defaultThinkingLevel": "high",
@@ -48,7 +48,6 @@
     "npm:@juicesharp/rpiv-todo",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-powerline-footer",
-    "npm:pi-mcp-adapter",
     "npm:pi-subagents"
   ]
 }
