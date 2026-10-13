@@ -281,7 +281,7 @@ git-remove-deleted-branches() {
 ulimit -c unlimited
 command -v mise > /dev/null && eval "$(mise activate zsh)"
 
-path=(/opt/dogbrew/shims/bin /opt/dogbrew/bin ${${path:#/opt/dogbrew/shims/bin}:#/opt/dogbrew/bin}); fpath=(/opt/dogbrew/share/zsh/site-functions ${fpath:#/opt/dogbrew/share/zsh/site-functions}); case ":${MANPATH-}:" in *:'/opt/dogbrew/share/man':*) ;; *) export MANPATH='/opt/dogbrew/share/man':${MANPATH-} ;; esac # dogbrew shell setup
+[ -f "/opt/dogbrew/share/etc/dogbrew/init.zsh" ] && . "/opt/dogbrew/share/etc/dogbrew/init.zsh"
 
 # Workspaces maintain a stable symlink for the forwarded SSH agent.
 # On macOS, preserve the launchd-provided SSH_AUTH_SOCK.
