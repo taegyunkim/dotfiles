@@ -19,8 +19,6 @@ if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
 fi
 
-export PYENV_ROOT="${PYENV_ROOT:-$HOME/.pyenv}"
-
 # Set PATH, MANPATH, etc., for Homebrew.
 if [[ -x "/opt/homebrew/bin/brew" ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -43,13 +41,6 @@ _path_prepend_if_dir "/usr/local/go/bin"
 
 if (( $+commands[go] )); then
   _path_prepend "$(go env GOPATH)/bin"
-fi
-
-_path_prepend_if_dir "$PYENV_ROOT/bin"
-
-if command -v pyenv > /dev/null; then
-  # Keep pyenv shims ahead of package-manager Pythons.
-  _path_prepend "$PYENV_ROOT/shims"
 fi
 
 if [[ -d "$HOME/.local/share/coursier/bin" ]]; then
@@ -205,30 +196,6 @@ bindkey "^[[4~" end-of-line       # [End] - goes at the end of the line
 bindkey '^[[A' history-substring-search-up # or '\eOA'
 bindkey '^[[B' history-substring-search-down # or '\eOB'
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
-
-# Pyenv installed with pyenv installer/homebrew
-
-if [[ ! -d "$HOME/dd" ]]; then
-  alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
-fi
-
-if command -v pyenv > /dev/null; then
-  # Interactive shell integration only; PATH ordering lives in zprofile.
-  if [[ -z "${PYENV_SHELL:-}" ]]; then
-    _evalcache pyenv init - --no-push-path --no-rehash
-  fi
-  # pyenv virtualenv-init disabled (~1.2s precmd penalty per command).
-  # Use `pyenv activate <env>` / `pyenv deactivate` manually.
-fi
-
-pyenv-brew-relink() {
-  rm -f "$HOME/.pyenv/versions/*-brew"
-  for i in $(brew --cellar)/python@*; do
-    echo "$i"
-    ln -s -f -v "$i" "$HOME/.pyenv/versions/${i##/*/}-brew"
-  done
-  pyenv rehash
-}
 
 if [[ ! -d "$HOME/dd" ]]; then
   if [[ $OSTYPE == 'linux-gnu' && -s "/usr/lib/jvm/default-java" ]]; then
