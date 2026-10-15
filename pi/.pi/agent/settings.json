@@ -1,8 +1,8 @@
 {
   "lastChangelogVersion": "1.2.0",
-  "defaultProvider": "ai-gw-openai",
-  "defaultModel": "openai/gpt-6-astra",
-  "defaultThinkingLevel": "high",
+  "defaultProvider": "ai-gw-anthropic-200k",
+  "defaultModel": "anthropic/claude-opus-5-5",
+  "defaultThinkingLevel": "medium",
   "theme": "light",
   "powerline": {
     "context": {
