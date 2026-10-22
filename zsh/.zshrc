@@ -245,6 +245,47 @@ git-remove-deleted-branches() {
   git worktree prune
 }
 
+# wt <branch>: create or reuse a worktree under .worktrees/taegyunkim/<branch>
+# in the main checkout, then cd into it. Uses an existing local branch, else
+# tracks origin/<branch> if it exists, else creates a new branch from origin's
+# default branch (fetched first).
+wt() {
+  local name=${1:?usage: wt <branch>}
+  local root
+  root=$(git worktree list --porcelain 2>/dev/null | sed -n '1s/^worktree //p')
+  [[ -n $root ]] || { echo "wt: not in a git repo" >&2; return 1; }
+
+  local dir="$root/.worktrees/taegyunkim/$name"
+  if [[ -d $dir ]]; then
+    cd "$dir"; return
+  fi
+
+  if git -C "$root" show-ref --verify --quiet "refs/heads/$name"; then
+    git -C "$root" worktree add "$dir" "$name" || return
+  # Fully qualified refspecs: with fetch.prune=true, a short source name makes
+  # git prune the ref it just fetched.
+  elif git -C "$root" fetch --quiet origin "+refs/heads/${name}:refs/remotes/origin/${name}" 2>/dev/null; then
+    git -C "$root" worktree add --track -b "$name" "$dir" "origin/$name" || return
+  else
+    local default
+    default=$(git -C "$root" symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null)
+    if [[ -z $default ]]; then
+      git -C "$root" remote set-head origin --auto >/dev/null 2>&1
+      default=$(git -C "$root" symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null)
+    fi
+    [[ -n $default ]] || { echo "wt: can't determine origin's default branch" >&2; return 1; }
+    git -C "$root" fetch --quiet origin "+refs/heads/${default#origin/}:refs/remotes/$default" || return
+    git -C "$root" worktree add --no-track -b "$name" "$dir" "$default" || return
+  fi
+  cd "$dir"
+}
+
+# Complete wt with local branch names.
+_wt() {
+  compadd -- ${(f)"$(git for-each-ref --format='%(refname:short)' refs/heads 2>/dev/null)"}
+}
+(( $+functions[compdef] )) && compdef _wt wt
+
 ulimit -c unlimited
 command -v mise > /dev/null && eval "$(mise activate zsh)"
 
