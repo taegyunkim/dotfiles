@@ -1,0 +1,9 @@
+# Local verification for `git verify-commit` / `git log --show-signature`.
+# Commercial signing keys from https://api.github.com/users/taegyunkim/ssh_signing_keys
+# plus the EMU (taegyun-kim_ddog) signing key.
+taegyun.kim@datadoghq.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICUydG+CEIWNIPqlhXdZ7ziSNBYasrqh8DnETskYfSL6
+taegyun.kim@datadoghq.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEv/OKEt57RJTuY4OU+DUbD9DY/wa5R7Ip7bcEcujlsp
+taegyun.kim@datadoghq.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKNHi3Ht/upacLDQEZzAJLBZl3dEjqeJaZL1eWZA/V+M
+taegyun.kim@datadoghq.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILOW4Koum5/9KaLH8ghdR2zLtZMxKuZik/m49bVI0hkg
+taegyun.kim@datadoghq.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDBrKZFu+AJ+67ptTB+BZhJsmZv7sOi5DaQPa49/dTCW
+taegyun.kim@datadoghq.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO4+zUxWvhMZ0aYhd7V+AWFEG67jCf82JO6CqXvpSXNT

@@ -1,0 +1,99 @@
+# GitHub org routing for Datadog work. Mirrors the layout of DevX's
+# git config-tool (see "How it works · git config-tool" in the DEVX Confluence
+# space), hand-rolled so it lives in dotfiles and works the same on the Mac
+# and on workspaces without running `git config-tool export`.
+#
+# Included unconditionally from:
+#   - git/.gitconfig (Mac), where the default identity stays personal, and
+#   - workspaces-dotfiles users/taegyun.kim/.gitconfig (workspaces).
+#
+# The DataDog org uses the commercial account (taegyunkim), the ddoghq orgs
+# use the EMU account (taegyun-kim_ddog). SSH key routing per account happens
+# in ssh/github.conf through the ddoghq.github.com host alias. Signing uses
+# the commercial key by default (gitconfig-dd) and the EMU key for repos with
+# any ddoghq remote (gitconfig-ddoghq).
+#
+# includeIf hasconfig matches the remote URL as stored in .git/config, before
+# insteadOf rewriting and case-sensitively, so every URL spelling is listed.
+# Files reached via hasconfig must not define remote URLs.
+
+# Force SSH for HTTPS clones of DataDog repos.
+[url "git@github.com:DataDog/"]
+	insteadOf = https://github.com/DataDog/
+	insteadOf = https://github.com/datadog/
+
+# Route ddoghq through the EMU host alias.
+[url "git@ddoghq.github.com:ddoghq/"]
+	insteadOf = git@github.com:ddoghq/
+	insteadOf = https://github.com/ddoghq/
+	insteadOf = ssh://git@github.com/ddoghq/
+
+# Route ddoghq-sandbox through the EMU host alias.
+[url "git@ddoghq.github.com:ddoghq-sandbox/"]
+	insteadOf = git@github.com:ddoghq-sandbox/
+	insteadOf = https://github.com/ddoghq-sandbox/
+	insteadOf = ssh://git@github.com/ddoghq-sandbox/
+
+# Route taegyun-kim_ddog through the EMU host alias.
+[url "git@ddoghq.github.com:taegyun-kim_ddog/"]
+	insteadOf = git@github.com:taegyun-kim_ddog/
+	insteadOf = https://github.com/taegyun-kim_ddog/
+	insteadOf = ssh://git@github.com/taegyun-kim_ddog/
+
+# Work identity and commercial signing key for DataDog repos.
+[includeIf "hasconfig:remote.*.url:git@github.com:DataDog/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+[includeIf "hasconfig:remote.*.url:https://github.com/DataDog/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+[includeIf "hasconfig:remote.*.url:https://github.com/datadog/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com/DataDog/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+
+# ddoghq repos: work identity, then the EMU signing key. Keep these last so
+# the ddoghq key wins in repos that also have a DataDog remote (e.g. dd-source).
+[includeIf "hasconfig:remote.*.url:git@github.com:ddoghq/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+	path = ~/.dotfiles/git/gitconfig-ddoghq
+[includeIf "hasconfig:remote.*.url:git@ddoghq.github.com:ddoghq/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+	path = ~/.dotfiles/git/gitconfig-ddoghq
+[includeIf "hasconfig:remote.*.url:https://github.com/ddoghq/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+	path = ~/.dotfiles/git/gitconfig-ddoghq
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com/ddoghq/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+	path = ~/.dotfiles/git/gitconfig-ddoghq
+[includeIf "hasconfig:remote.*.url:ssh://git@ddoghq.github.com/ddoghq/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+	path = ~/.dotfiles/git/gitconfig-ddoghq
+[includeIf "hasconfig:remote.*.url:git@github.com:ddoghq-sandbox/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+	path = ~/.dotfiles/git/gitconfig-ddoghq
+[includeIf "hasconfig:remote.*.url:git@ddoghq.github.com:ddoghq-sandbox/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+	path = ~/.dotfiles/git/gitconfig-ddoghq
+[includeIf "hasconfig:remote.*.url:https://github.com/ddoghq-sandbox/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+	path = ~/.dotfiles/git/gitconfig-ddoghq
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com/ddoghq-sandbox/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+	path = ~/.dotfiles/git/gitconfig-ddoghq
+[includeIf "hasconfig:remote.*.url:ssh://git@ddoghq.github.com/ddoghq-sandbox/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+	path = ~/.dotfiles/git/gitconfig-ddoghq
+[includeIf "hasconfig:remote.*.url:git@github.com:taegyun-kim_ddog/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+	path = ~/.dotfiles/git/gitconfig-ddoghq
+[includeIf "hasconfig:remote.*.url:git@ddoghq.github.com:taegyun-kim_ddog/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+	path = ~/.dotfiles/git/gitconfig-ddoghq
+[includeIf "hasconfig:remote.*.url:https://github.com/taegyun-kim_ddog/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+	path = ~/.dotfiles/git/gitconfig-ddoghq
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com/taegyun-kim_ddog/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+	path = ~/.dotfiles/git/gitconfig-ddoghq
+[includeIf "hasconfig:remote.*.url:ssh://git@ddoghq.github.com/taegyun-kim_ddog/**"]
+	path = ~/.dotfiles/git/gitconfig-dd
+	path = ~/.dotfiles/git/gitconfig-ddoghq

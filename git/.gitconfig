@@ -27,8 +27,8 @@
 	name = Taegyun Kim
 	email = k.taegyun@gmail.com
 
-# Datadog overlay. Applies to:
-#   - any repo (or worktree) whose `origin` URL is a DataDog GitHub repo.
-# Requires git >= 2.36. See git/gitconfig-dd.
-[includeIf "hasconfig:remote.*.url:git@github.com:DataDog/**"]
-	path = ~/.dotfiles/git/gitconfig-dd
+# Datadog work overlay (DataDog + ddoghq orgs): URL routing, work identity,
+# and per-org signing keys, applied only to repos with a matching remote.
+# Requires git >= 2.36 for includeIf hasconfig. See git/gitconfig-github.
+[include]
+	path = ~/.dotfiles/git/gitconfig-github

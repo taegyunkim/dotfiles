@@ -1,0 +1,6 @@
+# EMU (taegyun-kim_ddog) signing key for repos with a ddoghq remote. GitHub
+# only verifies ddoghq commits against signing keys registered on the EMU
+# account. Included by gitconfig-github after gitconfig-dd, so only the key
+# changes. Must not define remote URLs (it is reached via includeIf hasconfig).
+[user]
+	signingKey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO4+zUxWvhMZ0aYhd7V+AWFEG67jCf82JO6CqXvpSXNT

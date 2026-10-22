@@ -4,12 +4,6 @@ vim/.vim/backups/
 tmux/.tmux/plugins/*
 !tmux/.tmux/plugins/tpm
 
-# The global gitignore (git/.gitignore) has `.claude/` so Claude Code state
-# doesn't get committed in random project repos. Override that here so the
-# dotfiles' own claude/.claude/ payload (the symlink target for ~/.claude/)
-# is tracked.
-!claude/.claude/
-
 # Pi agent config: track stable, hand-authored config only. Keep auth, OAuth,
 # caches, sessions, generated models, npm installs, and trust state local.
 pi/.pi/agent/*

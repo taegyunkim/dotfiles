@@ -1,16 +1,19 @@
-# Datadog overlay. Loaded by git/gitconfig via includeIf "gitdir:~/dd/" so
-# these settings only apply to repos cloned under ~/dd/. Personal repos
-# elsewhere keep using the base config.
+# Datadog work identity and commit signing with the commercial (taegyunkim)
+# signing key. Included by gitconfig-github for repos with a DataDog or
+# ddoghq remote, and unconditionally by the workspace gitconfig.
+#
+# The key is given inline (key::) so git asks the SSH agent for the private
+# half. That works on the Mac and on workspaces through agent forwarding.
+# gpg.ssh.program is intentionally unset (git uses ssh-keygen), matching
+# git config-tool; dd-gitsign is slated for deprecation.
 [user]
 	email = taegyun.kim@datadoghq.com
-	signingkey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILOW4Koum5/9KaLH8ghdR2zLtZMxKuZik/m49bVI0hkg
-[dd-gitsign]
-	username = taegyunkim
+	signingKey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILOW4Koum5/9KaLH8ghdR2zLtZMxKuZik/m49bVI0hkg
 [gpg]
 	format = ssh
 [gpg "ssh"]
-	program = dd-gitsign
+	allowedSignersFile = ~/.dotfiles/git/allowed-signers
 [commit]
-	gpgsign = true
+	gpgSign = true
 [tag]
-	gpgsign = true
+	gpgSign = true

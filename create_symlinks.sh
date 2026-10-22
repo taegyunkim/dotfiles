@@ -2,11 +2,9 @@
 # Symlink dotfiles into $HOME via GNU stow. Idempotent: safe to re-run.
 #
 # Contract with workspaces-dotfiles (DataDog/workspaces-dotfiles users/<u>):
-#   - Workspace's first_login.sh exports WORK_DIR=<user-dir>/claude before
-#     calling this script. We pass that env var through to claude/install.sh,
-#     which runs $WORK_DIR/bootstrap.sh if it exists.
-#   - Manual re-runs also detect the workspace overlay from ~/.gitconfig when
-#     it points into workspaces-dotfiles/users/<u>/.gitconfig.
+#   - Workspace's first_login.sh symlinks ~/.gitconfig into
+#     workspaces-dotfiles/users/<u>/.gitconfig before calling this script.
+#     We detect the workspace from that symlink (also on manual re-runs).
 #   - On workspaces we skip stowing the `git` package entirely: the workspace
 #     platform manages ~/.gitconfig, and either a regular file or symlink would
 #     conflict with stow. The personal git/.gitconfig is bypassed on workspaces
@@ -31,34 +29,19 @@ fi
 
 cd ~/.dotfiles
 
-WORKSPACE_USER_DIR="${WORKSPACE_USER_DIR:-}"
 WORKSPACE_OWNS_GITCONFIG=0
-if [ -z "$WORKSPACE_USER_DIR" ] && [ -n "${WORK_DIR:-}" ]; then
-  WORKSPACE_USER_DIR="${WORK_DIR%/claude}"
-  if [ "$WORKSPACE_USER_DIR" = "$WORK_DIR" ]; then
-    WORKSPACE_USER_DIR="$(dirname "$WORK_DIR")"
-  fi
-  WORKSPACE_OWNS_GITCONFIG=1
-fi
 if [ -L "$HOME/.gitconfig" ]; then
-  gitconfig_target="$(readlink "$HOME/.gitconfig")"
-  case "$gitconfig_target" in
+  case "$(readlink "$HOME/.gitconfig")" in
     */workspaces-dotfiles/users/*/.gitconfig)
-      WORKSPACE_USER_DIR="${gitconfig_target%/.gitconfig}"
       WORKSPACE_OWNS_GITCONFIG=1
       ;;
   esac
-fi
-if [ -z "$WORKSPACE_USER_DIR" ] && [ -d "$HOME/dd/workspaces-dotfiles/users/$USER" ]; then
-  WORKSPACE_USER_DIR="$HOME/dd/workspaces-dotfiles/users/$USER"
-fi
-if [ -z "${WORK_DIR:-}" ] && [ -n "$WORKSPACE_USER_DIR" ] && [ -d "$WORKSPACE_USER_DIR/claude" ]; then
-  export WORK_DIR="$WORKSPACE_USER_DIR/claude"
 fi
 
 # Migration cleanup: the previous create_symlinks.sh left bare symlinks under
 # $HOME pointing into ~/.dotfiles. Stow refuses to overwrite arbitrary
 # symlinks, so remove any that point into the dotfiles repo before stowing.
+# ~/.claude is included to clean up links left by the removed claude package.
 find ~ -maxdepth 1 -type l -lname "*/.dotfiles/*" -delete 2>/dev/null || true
 find ~/.config -maxdepth 1 -type l -lname "*/.dotfiles/*" -delete 2>/dev/null || true
 find ~/.claude -maxdepth 1 -type l -lname "*/.dotfiles/*" -delete 2>/dev/null || true
@@ -79,12 +62,24 @@ if [ -L ~/.local/share/nvim ]; then
   rm ~/.local/share/nvim
 fi
 
-mkdir -p ~/.config ~/.local/share/nvim ~/.claude ~/.pi/agent/extensions
+mkdir -p ~/.config ~/.local/share/nvim ~/.pi/agent/extensions
 
-# Stow claude first so ~/.claude/settings.json is in place before
-# claude/install.sh writes through it via the Claude CLI.
-stow --target="$HOME" --restow claude
-~/.dotfiles/claude/install.sh
+# GitHub SSH routing (DataDog vs ddoghq accounts). ~/.ssh/config is not
+# stow-managed (the workspaces CLI and other tools write to it), so just make
+# sure it includes ssh/github.conf before any `Host *` block. On the Mac, keep
+# the workspaces CLI's generated block first, as it asks.
+SSH_INCLUDE="Include ~/.dotfiles/ssh/github.conf"
+mkdir -p ~/.ssh && chmod 700 ~/.ssh
+touch ~/.ssh/config && chmod 600 ~/.ssh/config
+if ! grep -qxF "$SSH_INCLUDE" ~/.ssh/config; then
+  tmp="$(mktemp)"
+  if grep -qxF "## END -- workspaces cli" ~/.ssh/config; then
+    awk -v inc="$SSH_INCLUDE" '{ print } $0 == "## END -- workspaces cli" { print ""; print inc }' ~/.ssh/config > "$tmp"
+  else
+    { printf '%s\n\n' "$SSH_INCLUDE"; cat ~/.ssh/config; } > "$tmp"
+  fi
+  cat "$tmp" > ~/.ssh/config && rm -f "$tmp"
+fi
 
 # Preserve existing Pi agent runtime state, but let stow manage stable config
 # files from ~/.dotfiles/pi. Auth, OAuth, caches, sessions, generated models,

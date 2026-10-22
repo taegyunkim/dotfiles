@@ -42,7 +42,4 @@ return {
       { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "TODO (Telescope)" },
     },
   },
-
-  -- Session persistence
-  { "tpope/vim-obsession", cmd = { "Obsession" } },
 }
