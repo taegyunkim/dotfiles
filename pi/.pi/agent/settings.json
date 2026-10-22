@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.2.0",
+  "lastChangelogVersion": "1.4.0",
   "defaultProvider": "ai-gw-anthropic-200k",
   "defaultModel": "anthropic/claude-opus-5-5",
   "defaultThinkingLevel": "medium",
