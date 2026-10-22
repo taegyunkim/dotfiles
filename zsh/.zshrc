@@ -255,8 +255,17 @@ wt() {
   root=$(git worktree list --porcelain 2>/dev/null | sed -n '1s/^worktree //p')
   [[ -n $root ]] || { echo "wt: not in a git repo" >&2; return 1; }
 
-  local dir="$root/.worktrees/taegyunkim/$name"
+  # Drop a leading taegyunkim/ so wt taegyunkim/foo doesn't nest the folder.
+  local dir="$root/.worktrees/taegyunkim/${name#taegyunkim/}"
   if [[ -d $dir ]]; then
+    # wt foo and wt taegyunkim/foo share a folder, so make sure it holds
+    # the requested branch before reusing it.
+    local current
+    current=$(git -C "$dir" symbolic-ref --quiet --short HEAD 2>/dev/null)
+    if [[ $current != "$name" ]]; then
+      echo "wt: $dir has ${current:-a detached HEAD} checked out, not $name" >&2
+      return 1
+    fi
     cd "$dir"; return
   fi
 
