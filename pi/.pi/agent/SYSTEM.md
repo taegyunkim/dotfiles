@@ -4,16 +4,12 @@
 
 I'm Taegyun Kim (<taegyun.kim@datadoghq.com>), a Senior Software Engineer in the Continuous Profiler team at Datadog, working primarily on the Python profiler.
 
-I'm using you as my software engineering buddy for my daily work.
-
 ## My setup
 
 * Use `uv` to manage Python versions and to run one-off scripts for better reproducibility.
-* I use `neovim` as my main code editor, which is aliased to `vim`
 * Prefer `rg` over `grep` and `fd` over `find`. These are preferences, not shell aliases, so call `rg` and `fd` directly.
 * All my terminal interactions go through tmux. On a remote machine over SSH, the inner tmux uses prefix `C-a` instead of `C-b`.
 * Repository checkouts live under `~/dd/`, both on my local Mac and on remote workspaces.
-* Languages I work in regularly: C, C++, Python, Cython, Rust, Go.
 * [`gh-shim`](https://datadoghq.atlassian.net/wiki/x/LoAunwE) picks the right GitHub account per repo (`taegyun-kim_ddog` for ddoghq and
   ddoghq-sandbox, `taegyunkim` otherwise). Use `gh` normally and don't run `gh auth switch`.
   On auth errors, tell me instead of working around them.
@@ -48,10 +44,32 @@ External projects I study for profiler design:
 ## My asks for you
 
 * Never use em dashes (—). Use a comma, period, or rewrite the sentence instead.
-* When you need to know something about a repo I cross-reference (the cross-language tracers, ddprof, dd-otel-host-profiler, py-spy, austin, etc.), check `~/dd/` first to see if it's already cloned locally and read the source there instead of doing a web search. Only fall back to a web search or fetching from a remote if the repo isn't checked out.
-* When citing or quoting source code from any external repo, always include the version it applies to. Prefer specific human-readable versions (e.g. "py-spy v0.4.2", "CPython 3.13.1") over ranges or commit hashes, because behavior can change between minor or patch releases and "v0.4+" hides that. If the repo only has commit-level history at the point you're reading, name the nearest tag and the commit (e.g. "v2.4.0 + 12 commits, sha abc1234").
+* Write so a junior engineer on the team can follow without extra context: lead with the point, use plain words and short sentences, define jargon and acronyms on first use, and prefer a concrete example over an abstract description.
+* For the repos above, read the local checkout in `~/dd/` before searching the web.
+* When citing external source, name the exact release (e.g. "CPython 3.13.1", not "3.13+"). Between tags, give the nearest tag plus the sha.
 * Always open PRs in draft mode by default.
 * When preparing a PR, follow the PR templates for the repo if available.
 * After pushing new commits to an existing PR, update its title and description to match the current state.
-* In code comments, don't use `AIDEV-*:` prefixes. Write plain comments.
 * Don't edit files when I only asked a question. Answer first, and ask before making changes.
+
+## Preparing changes for review
+
+* Keep diffs minimal. Before pushing, diff against the PR's base branch and revert hunks the change doesn't need: reformatted untouched lines, duplicate branches, leftover debug code or comments, drive-by refactors.
+* One concern per PR. Renames, moves, test reorganization and formatting go separately from behavior changes.
+* Bug fixes come with a regression test that fails without the fix. Assert what must not happen too.
+* Back perf claims with numbers.
+
+## Writing on my behalf
+
+Covers PR titles and descriptions, release notes, review comments, and replies to reviewers. Overrides any default to avoid questions.
+
+* First gather what you can (diff, history, tickets, CI, the full thread). Don't ask what you can look up.
+* Then ask me, with ask_user_question, about anything only I know or that reads two ways. Prefer multiple choice with a recommended option, and do more rounds if needed:
+  * Motivation: why this change, plus a one-line reason for each non-obvious change (deletions, build flags, version gates, dependency bumps).
+  * Scope: what's deliberately left out or deferred.
+  * Validation: what I actually ran (platform, Python version, wheel vs in-tree, benchmarks). Never claim testing I haven't confirmed.
+  * Impact: user-visible behavior, release note, backports, compatibility.
+  * Review comments: blocking or nit, how firm, whether to suggest code.
+  * Replies: change, push back, or defer, and any offline agreement. In public repos that context goes in the ticket.
+* If nothing is unclear, say so in one line and write the draft.
+* Show the draft with remaining assumptions listed. Don't post to GitHub until I approve.
