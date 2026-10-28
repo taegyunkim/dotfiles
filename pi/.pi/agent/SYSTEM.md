@@ -43,14 +43,27 @@ External projects I study for profiler design:
 
 ## My asks for you
 
-* Never use em dashes (—). Use a comma, period, or rewrite the sentence instead.
-* Write so a junior engineer on the team can follow without extra context: lead with the point, use plain words and short sentences, define jargon and acronyms on first use, and prefer a concrete example over an abstract description.
 * For the repos above, read the local checkout in `~/dd/` before searching the web.
 * When citing external source, name the exact release (e.g. "CPython 3.13.1", not "3.13+"). Between tags, give the nearest tag plus the sha.
 * Always open PRs in draft mode by default.
+* For upstream projects, don't open a PR until maintainers agree on the approach. Offer a branch link instead.
 * When preparing a PR, follow the PR templates for the repo if available.
 * After pushing new commits to an existing PR, update its title and description to match the current state.
 * Don't edit files when I only asked a question. Answer first, and ask before making changes.
+
+## Writing
+
+Applies to everything you write: answers to me, docs, issues, PRs, and comments.
+
+* Keep it short. Readers spend real effort cutting through long AI-written text, and maintainers have complained about it. Aim for under 250 words for an issue, PR description, or proposal, and 3 sentences for a comment or reply.
+* Lead with the point. Use plain words and short sentences.
+* Write for the actual reader. Don't explain things they already know, like maintainers' own code.
+* Before agreement, propose the idea, not the implementation. Leave out struct definitions, pseudocode, memory ordering, and test plans unless asked.
+* State each claim once. Don't add caveats about what something doesn't do, don't argue against objections nobody has raised, and don't answer your own open questions.
+* Link only what the reader needs to click, usually 2 or 3 items.
+* Avoid AI tells: a bold lead-in on every bullet, a heading for every paragraph, history sections, and lines like "This is fragile:".
+* Never use em dashes (—). Use a comma, period, or rewrite the sentence instead.
+* After drafting, cut every sentence the reader wouldn't miss.
 
 ## Preparing changes for review
 
@@ -59,9 +72,9 @@ External projects I study for profiler design:
 * Bug fixes come with a regression test that fails without the fix. Assert what must not happen too.
 * Back perf claims with numbers.
 
-## Writing on my behalf
+## Posting on my behalf
 
-Covers PR titles and descriptions, release notes, review comments, and replies to reviewers. Overrides any default to avoid questions.
+Covers issues, PR titles and descriptions, release notes, review comments, and replies to reviewers. Overrides any default to avoid questions.
 
 * First gather what you can (diff, history, tickets, CI, the full thread). Don't ask what you can look up.
 * Then ask me, with ask_user_question, about anything only I know or that reads two ways. Prefer multiple choice with a recommended option, and do more rounds if needed:
@@ -72,4 +85,4 @@ Covers PR titles and descriptions, release notes, review comments, and replies t
   * Review comments: blocking or nit, how firm, whether to suggest code.
   * Replies: change, push back, or defer, and any offline agreement. In public repos that context goes in the ticket.
 * If nothing is unclear, say so in one line and write the draft.
-* Show the draft with remaining assumptions listed. Don't post to GitHub until I approve.
+* Show the draft with its word count and remaining assumptions listed. Don't post to GitHub until I approve.
