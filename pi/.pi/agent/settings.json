@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.4.0",
+  "lastChangelogVersion": "1.5.0",
   "defaultProvider": "ai-gw-anthropic-200k",
   "defaultModel": "anthropic/claude-opus-5-5",
   "defaultThinkingLevel": "medium",
@@ -49,5 +49,14 @@
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-powerline-footer",
     "npm:pi-subagents"
-  ]
+  ],
+  "extensionChangelogVersions": {
+    "{\"source\":\"~/dd/datadog-pi-packages/packages/confluence-cli\",\"scope\":\"user\"}": "0.5.0",
+    "{\"source\":\"~/dd/datadog-pi-packages/packages/compaction-continue\",\"scope\":\"user\"}": "0.1.1",
+    "{\"source\":\"~/dd/datadog-pi-packages/packages/refresh-models\",\"scope\":\"user\"}": "0.6.17",
+    "{\"source\":\"~/dd/datadog-pi-packages/packages/notifications\",\"scope\":\"user\"}": "0.1.0",
+    "{\"source\":\"~/dd/datadog-pi-packages/packages/dd-pi-packages-sync\",\"scope\":\"user\"}": "0.1.0",
+    "{\"source\":\"npm:pi-powerline-footer\",\"scope\":\"user\"}": "0.22.0",
+    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.84.0"
+  }
 }
