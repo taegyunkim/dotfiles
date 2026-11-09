@@ -15,3 +15,5 @@ pi/.pi/agent/extensions/*
 !pi/.pi/agent/extensions/github-pr-footer.ts
 !pi/.pi/agent/scripts/
 !pi/.pi/agent/scripts/slack-mcp-auth-pi.py
+!pi/.pi/agent/skills/
+!pi/.pi/agent/agents/

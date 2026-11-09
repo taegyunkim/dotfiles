@@ -1,0 +1,7 @@
+{
+  "reviewers": [
+    { "model": "ai-gw-anthropic-1m/anthropic/claude-opus-5-5", "thinking": "high" },
+    { "model": "ai-gw-openai/openai/gpt-6-astra", "thinking": "high" }
+  ],
+  "maxRounds": 3
+}
