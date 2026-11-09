@@ -91,6 +91,13 @@ for f in SYSTEM.md mcp.json settings.json scripts/slack-mcp-auth-pi.py; do
 done
 stow --target="$HOME" --restow pi
 
+# Workspaces now provision a regular ~/.tmux.conf that sets up
+# resurrect/continuum session persistence. Move it aside so stow can link ours;
+# tmux/.tmux.conf sources ~/.tmux.conf.workspace when present.
+if [ -f ~/.tmux.conf ] && [ ! -L ~/.tmux.conf ]; then
+  mv -f ~/.tmux.conf ~/.tmux.conf.workspace
+fi
+
 # Stow everything except zsh. On workspaces, skip the git package because the
 # workspace platform provisions ~/.gitconfig from workspaces-dotfiles.
 packages=(dircolors vim tmux nvim)
